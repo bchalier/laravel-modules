@@ -1,0 +1,40 @@
+{
+    "name": "bchalier/laravel-modules",
+    "description": "Module management in laravel.",
+    "keywords": ["laravel", "modules"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bastien Chalier",
+            "email": "bastien@chalier.io"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/framework": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SystemModules\\": "src/SystemModules/",
+            "Modules\\": "../../../modules/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bchalier\\Modules\\LaravelModulesServiceProvider"
+            ],
+            "aliases": {
+                "ModulesManager": "SystemModules\\Core\\Facades\\ModulesManager"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

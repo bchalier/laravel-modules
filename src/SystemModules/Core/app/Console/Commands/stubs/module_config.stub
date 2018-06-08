@@ -1,0 +1,9 @@
+{
+  "name": "DummyName",
+  "alias": "DummyAlias",
+  "description": "A perfect description for a brand new module !",
+  "keywords": [],
+  "install": {
+    "migrate": true
+  }
+}
