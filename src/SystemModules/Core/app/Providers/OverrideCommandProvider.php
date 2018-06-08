@@ -14,6 +14,7 @@ use SystemModules\Core\App\Console\Commands\MakeJob;
 use SystemModules\Core\App\Console\Commands\MakeListener;
 use SystemModules\Core\App\Console\Commands\MakeMail;
 use SystemModules\Core\App\Console\Commands\MakeMiddleware;
+use SystemModules\Core\App\Console\Commands\MakeMigration;
 use SystemModules\Core\App\Console\Commands\MakeModel;
 use SystemModules\Core\App\Console\Commands\MakeNotification;
 use SystemModules\Core\App\Console\Commands\MakeRequest;
@@ -78,6 +79,13 @@ class OverrideCommandProvider extends ServiceProvider
 
         $this->app->extend('command.resource.make', function () {
             return new MakeResource(new Filesystem);
+        });
+
+        $this->app->extend('command.migrate.make', function () {
+            $creator = $this->app->get('migration.creator');
+            $composer = $this->app->get('composer');
+            
+            return new MakeMigration($creator, $composer);
         });
     }
 }

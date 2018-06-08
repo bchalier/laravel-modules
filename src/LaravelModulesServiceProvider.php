@@ -30,17 +30,17 @@ class LaravelModulesServiceProvider extends ServiceProvider
     private function loadMigrations(Module $module)
     {
         if (empty($module->loadParameters['compartmentalize']['migrations']))
-            $this->loadMigrationsFrom($module->path . 'Database/migrations');
+            $this->loadMigrationsFrom($module->path . 'database/migrations');
     }
 
     private function loadViews(Module $module)
     {
-        $this->loadViewsFrom(base_path($module->path . 'Resources/views'), $module->alias);
+        $this->loadViewsFrom(base_path($module->path . 'resources/views'), $module->alias);
     }
 
     private function loadTranslations(Module $module)
     {
-        $this->loadTranslationsFrom(base_path($module->path . 'Resources/lang'), $module->alias);
+        $this->loadTranslationsFrom(base_path($module->path . 'resources/lang'), $module->alias);
     }
 
     private function loadRoutes(Module $module)

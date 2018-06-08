@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\DummyModule\Console;
+namespace Modules\DummyModule\App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 

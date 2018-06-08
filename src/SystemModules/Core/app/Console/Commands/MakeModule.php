@@ -68,7 +68,7 @@ class MakeModule extends Command
      * @param string $module
      * @return bool
      */
-    private function generate($module)
+    protected function generate($module)
     {
         $relativePath = "modules/$module/";
         $path = base_path($relativePath);
@@ -94,6 +94,7 @@ class MakeModule extends Command
         
         $this->makeDirectory($path . 'routes');
         $this->makeRoutes($path);
+        $this->makeDatabaseDirectory($module, $path);
         
         return true;
     }
@@ -103,7 +104,7 @@ class MakeModule extends Command
      *
      * @return string
      */
-    private function getConfigStub()
+    protected function getConfigStub()
     {
         return __DIR__ . '/stubs/module_config.stub';
     }
@@ -113,7 +114,7 @@ class MakeModule extends Command
      *
      * @return array
      */
-    private function getRoutesStub()
+    protected function getRoutesStub()
     {
         return [
             'api' => __DIR__ . '/stubs/route_api.stub',
@@ -124,13 +125,23 @@ class MakeModule extends Command
     }
     
     /**
+     * Get the stub file for the generator.
+     *
+     * @return string
+     */
+    protected function getSeederStub()
+    {
+        return __DIR__ . '/stubs/database_seeder.stub';
+    }
+    
+    /**
      * Replace the name for the given stub.
      *
      * @param  string $stub
      * @param  string $name
      * @return $this
      */
-    private function replaceName(&$stub, $name)
+    protected function replaceName(&$stub, $name)
     {
         $stub = str_replace('DummyName', $name, $stub);
         
@@ -144,7 +155,7 @@ class MakeModule extends Command
      * @param  string $alias
      * @return $this
      */
-    private function replaceAlias(&$stub, $alias)
+    protected function replaceAlias(&$stub, $alias)
     {
         $stub = str_replace('DummyAlias', $alias, $stub);
         
@@ -176,12 +187,12 @@ class MakeModule extends Command
     }
     
     /**
-     * Build the directory for the class if necessary.
+     * Create the directory for the class if necessary.
      *
      * @param  string $path
      * @return string
      */
-    private function makeDirectory($path)
+    protected function makeDirectory($path)
     {
         if (!$this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0755, true, true);
@@ -190,7 +201,13 @@ class MakeModule extends Command
         return $path;
     }
     
-    private function makeDefaultConfig($module, $path)
+    /**
+     * Create the default config file for the module.
+     *
+     * @param $module
+     * @param $path
+     */
+    protected function makeDefaultConfig($module, $path)
     {
         $stub = $this->files->get($this->getConfigStub());
         $this->replaceAlias($stub, strtolower($module))->replaceName($stub, $module);
@@ -198,7 +215,12 @@ class MakeModule extends Command
         $this->files->put($path . '/module.json', $stub);
     }
     
-    private function makeRoutes($path)
+    /**
+     * Create the 4 routes files.
+     *
+     * @param $path
+     */
+    protected function makeRoutes($path)
     {
         $stubsPath = $this->getRoutesStub();
         
@@ -206,5 +228,25 @@ class MakeModule extends Command
             $stub = $this->files->get($stubPath);
             $this->files->put($path . "routes/$route.php", $stub);
         }
+    }
+    
+    /**
+     * Create the database directory.
+     *
+     * @param $module
+     * @param $path
+     */
+    protected function makeDatabaseDirectory($module, $path)
+    {
+        $path = $path . 'database/';
+        
+        $this->makeDirectory($path . 'factories');
+        $this->makeDirectory($path . 'migrations');
+        $this->makeDirectory($path . 'seeds');
+    
+        $stub = $this->files->get($this->getSeederStub());
+        $this->replaceName($stub, $module);
+    
+        $this->files->put($path . 'seeds/DatabaseSeeder.php', $stub);
     }
 }
