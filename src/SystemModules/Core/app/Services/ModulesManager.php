@@ -29,8 +29,9 @@ class ModulesManager
 
     public function getActiveModules()
     {
-        if (!Schema::hasTable('modules'))
-            self::install('vendor/bchalier/laravel-modules/src/SystemModules/Core/');
+        if (!Schema::hasTable('modules')) {
+            $this->install('vendor/bchalier/laravel-modules/src/SystemModules/Core/');
+        }
 
         return Module::where('active', true)->get();
     }
@@ -47,7 +48,7 @@ class ModulesManager
         // migrate migrations
         if ($config['install']['migrate'])
             Artisan::call('migrate', [
-                '--path' => $path . 'Database/migrations'
+                '--path' => $path . 'database/migrations'
             ]);
 
         // createDir directive

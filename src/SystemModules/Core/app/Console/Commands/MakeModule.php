@@ -36,7 +36,7 @@ class MakeModule extends Command
      *
      * @var string
      */
-    protected $name = 'make:module';
+    protected $signature = 'make:module {modules*}';
     
     /**
      * The console command description.
@@ -49,6 +49,7 @@ class MakeModule extends Command
      * Execute the console command.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle()
     {
@@ -67,6 +68,7 @@ class MakeModule extends Command
      *
      * @param string $module
      * @return bool
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function generate($module)
     {
@@ -206,6 +208,7 @@ class MakeModule extends Command
      *
      * @param $module
      * @param $path
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function makeDefaultConfig($module, $path)
     {
@@ -219,6 +222,7 @@ class MakeModule extends Command
      * Create the 4 routes files.
      *
      * @param $path
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function makeRoutes($path)
     {
@@ -235,6 +239,7 @@ class MakeModule extends Command
      *
      * @param $module
      * @param $path
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function makeDatabaseDirectory($module, $path)
     {
