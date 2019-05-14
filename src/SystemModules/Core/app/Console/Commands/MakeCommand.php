@@ -14,7 +14,7 @@ class MakeCommand extends BaseConsoleMakeCommand
      */
     public function postHandle()
     {
-        if ($this->module && !$this->files->exists($this->module->path.'App/Console/Kernel.php')) {
+        if ($this->module && !$this->files->exists($this->module->path.'app/Console/Kernel.php')) {
             $className = $this->argument('name');
             $module = $this->module->name;
 
@@ -32,7 +32,7 @@ class MakeCommand extends BaseConsoleMakeCommand
      */
     protected function getKernelStub()
     {
-        return __DIR__ . '/../stubs/console-kernel.stub';
+        return base_path('vendor/bchalier/laravel-modules/src/SystemModules/Core/app/Console/Commands/stubs/console-kernel.stub');
     }
 
     /**

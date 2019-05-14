@@ -17,7 +17,33 @@ class MakeModule extends Command
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $files;
-    
+
+    /** @var array : list the available commands for the --fill option */
+    const fillMakeCommandList = [
+//        'channel',
+        'command',
+        'controller',
+        'event',
+        'exception',
+        'factory',
+        'job',
+        'listener',
+        'mail',
+        'middleware',
+        'migration',
+        'model',
+        'notification',
+//        'observer',
+//        'policy',
+//        'provider',
+        'request',
+        'resource',
+//        'rule',
+//        'seeder',
+        'service',
+//        'test',
+    ];
+
     /**
      * Create a new controller creator command instance.
      *
@@ -36,7 +62,7 @@ class MakeModule extends Command
      *
      * @var string
      */
-    protected $signature = 'make:module {modules*}';
+    protected $name = 'make:module';
     
     /**
      * The console command description.
@@ -97,7 +123,11 @@ class MakeModule extends Command
         $this->makeDirectory($path . 'routes');
         $this->makeRoutes($path);
         $this->makeDatabaseDirectory($module, $path);
-        
+
+        if ($this->option('fill')) {
+            $this->fill($module);
+        }
+
         return true;
     }
     
@@ -184,7 +214,7 @@ class MakeModule extends Command
     protected function getOptions()
     {
         return [
-            ['fill', null, InputOption::VALUE_OPTIONAL, 'Fill the module with example stuff'],
+            ['fill', null, InputOption::VALUE_NONE, 'Fill the module with example stuff'],
         ];
     }
     
@@ -253,5 +283,27 @@ class MakeModule extends Command
         $this->replaceName($stub, $module);
     
         $this->files->put($path . 'seeds/DatabaseSeeder.php', $stub);
+    }
+
+    /**
+     * Call all the make:* commands for the current module
+     *
+     * @param $module
+     */
+    protected function fill($module)
+    {
+        $bar = $this->output->createProgressBar(count(self::fillMakeCommandList));
+        $bar->start();
+
+        foreach (self::fillMakeCommandList as $command) {
+            $this->callSilent("make:$command", [
+                '--module' => $module,
+                'name' => 'Dummy' . ucfirst($command)
+            ]);
+            $bar->advance();
+        }
+
+        $bar->finish();
+        $this->line(''); // the next line will be next to the progress bar if we don't do that
     }
 }
