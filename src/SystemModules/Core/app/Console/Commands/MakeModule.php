@@ -19,7 +19,7 @@ class MakeModule extends Command
     protected $files;
 
     /** @var array : list the available commands for the --fill option */
-    const fillMakeCommandList = [
+    const fillMakeCommandList = [ // the commented items are not yet supported
 //        'channel',
         'command',
         'controller',
