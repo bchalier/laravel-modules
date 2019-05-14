@@ -12,7 +12,7 @@ class MakeCommand extends BaseConsoleMakeCommand
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public function postHandle()
+    public function afterHandle()
     {
         if ($this->module && !$this->files->exists($this->module->path.'app/Console/Kernel.php')) {
             $className = $this->argument('name');

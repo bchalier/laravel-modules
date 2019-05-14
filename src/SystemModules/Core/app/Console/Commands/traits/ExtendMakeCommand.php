@@ -30,8 +30,8 @@ trait ExtendMakeCommand
         
         $return = parent::handle();
         
-        if (method_exists($this, 'postHandle')) {
-            $this->postHandle();
+        if (method_exists($this, 'afterHandle')) {
+            $this->afterHandle();
         }
         
         return $return;

@@ -46,8 +46,8 @@ class MakeMigration extends MigrateMakeCommand
         
         parent::handle();
         
-        if (method_exists($this, 'postHandle')) {
-            $this->postHandle();
+        if (method_exists($this, 'afterHandle')) {
+            $this->afterHandle();
         }
     }
     
