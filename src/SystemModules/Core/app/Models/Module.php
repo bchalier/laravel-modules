@@ -74,10 +74,17 @@ class Module extends Model
      */
     public function isSystem()
     {
-        if (in_array($this->alias, $this->sysModules))
-            return true;
-        else
-            return false;
+        return in_array($this->getAlias(), $this->sysModules);
+    }
+
+    /**
+     * Get the alias of the module.
+     *
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
     }
 
     /**
@@ -88,6 +95,7 @@ class Module extends Model
     public function enable()
     {
         $this->active = true;
+
         return $this->save();
     }
 
@@ -99,6 +107,7 @@ class Module extends Model
     public function disable()
     {
         $this->active = false;
+
         return $this->save();
     }
 
@@ -112,6 +121,8 @@ class Module extends Model
     {
         if (parent::delete()) {
             return ModulesManager::delete($this);
+        } else {
+            return false;
         }
     }
 }

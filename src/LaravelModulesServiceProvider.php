@@ -10,6 +10,11 @@ use SystemModules\Core\App\Models\Module;
 
 class LaravelModulesServiceProvider extends ServiceProvider
 {
+    /**
+     * Load all laravel components for each module.
+     *
+     * @return void
+     */
     public function boot()
     {
         $modules = ModulesManager::getActiveModules();
@@ -27,6 +32,13 @@ class LaravelModulesServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Load all migrations of the said module unless
+     *
+     * @param Module $module
+     *
+     * @return void
+     */
     private function loadMigrations(Module $module)
     {
         if (empty($module->loadParameters['compartmentalize']['migrations']))

@@ -20,9 +20,7 @@ trait ExtendMakeCommand
     public function handle()
     {
         if (!empty($moduleAlias = $this->option('module'))) {
-            $this->module = Module::findAlias($moduleAlias);
-            
-            if (!$this->module) {
+            if (!$this->setModule($moduleAlias)) {
                 $this->error("$moduleAlias module don't exists!");
                 return false;
             }
@@ -35,6 +33,27 @@ trait ExtendMakeCommand
         }
         
         return $return;
+    }
+
+    /**
+     * Return the module.
+     *
+     * @return Module
+     */
+    protected function getModule()
+    {
+        return $this->module;
+    }
+
+    /**
+     * Fetch and store the module from it's alias.
+     *
+     * @param $moduleAlias
+     * @return Module
+     */
+    protected function setModule($moduleAlias)
+    {
+        return $this->module = Module::findAlias($moduleAlias);
     }
     
     /**
