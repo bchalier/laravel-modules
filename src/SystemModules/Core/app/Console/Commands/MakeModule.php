@@ -39,7 +39,7 @@ class MakeModule extends Command
         'request',
         'resource',
 //        'rule',
-//        'seeder',
+        'seeder',
         'service',
 //        'test',
     ];

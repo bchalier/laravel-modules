@@ -19,6 +19,7 @@ use SystemModules\Core\App\Console\Commands\MakeModel;
 use SystemModules\Core\App\Console\Commands\MakeNotification;
 use SystemModules\Core\App\Console\Commands\MakeRequest;
 use SystemModules\Core\App\Console\Commands\MakeResource;
+use SystemModules\Core\App\Console\Commands\MakeSeeder;
 
 class OverrideCommandProvider extends ServiceProvider
 {
@@ -81,11 +82,12 @@ class OverrideCommandProvider extends ServiceProvider
             return new MakeResource(new Filesystem);
         });
 
+        $this->app->extend('command.seeder.make', function () {
+            return new MakeSeeder(new Filesystem, $this->app->get('composer'));
+        });
+
         $this->app->extend('command.migrate.make', function () {
-            $creator = $this->app->get('migration.creator');
-            $composer = $this->app->get('composer');
-            
-            return new MakeMigration($creator, $composer);
+            return new MakeMigration($this->app->get('migration.creator'), $this->app->get('composer'));
         });
     }
 }
