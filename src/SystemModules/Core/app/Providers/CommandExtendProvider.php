@@ -5,6 +5,7 @@ namespace SystemModules\Core\Providers;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
+use SystemModules\Core\App\Console\Commands\Database\SeedCommand;
 use SystemModules\Core\App\Console\Commands\Make\ConsoleMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ControllerMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\EventMakeCommand;
@@ -30,7 +31,7 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
      * @var array
      */
     protected $commands = [
-//        'Seed' => 'command.seed',
+        'Seed' => 'command.seed',
     ];
 
     /**

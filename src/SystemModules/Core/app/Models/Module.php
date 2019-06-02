@@ -28,7 +28,7 @@ class Module extends Model
      *
      * @var array
      */
-    public $sysModules = [
+    const SYS_MODULES = [
         'core',
     ];
 
@@ -74,7 +74,7 @@ class Module extends Model
      */
     public function isSystem()
     {
-        return in_array($this->getAlias(), $this->sysModules);
+        return in_array($this->getAlias(), self::SYS_MODULES);
     }
 
     /**

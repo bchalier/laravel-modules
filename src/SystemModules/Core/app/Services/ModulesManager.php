@@ -28,13 +28,25 @@ class ModulesManager
         $this->files = $files;
     }
 
-    public function getModulesToLoad()
+    /**
+     * @param bool $andSystem
+     * @return Module[]
+     * @throws FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    public function getActiveModules($andSystem = false)
     {
         if (!Schema::hasTable('modules')) {
             $this->install('vendor/bchalier/laravel-modules/src/SystemModules/Core/');
         }
 
-        return Module::where('active', true)->get();
+        $query = Module::where('active', true);
+
+        if (!$andSystem) {
+            $query->whereNotIn('alias', Module::SYS_MODULES);
+        }
+
+        return $query->get();
     }
 
     /**
