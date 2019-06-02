@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\ResourceMakeCommand;
+use Illuminate\Foundation\Console\MailMakeCommand as BaseMailMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeResource extends ResourceMakeCommand
+class MailMakeCommand extends BaseMailMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeResource extends ResourceMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Http\Resources";
+            return $rootNamespace . "\\$moduleName\App\Mail";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

@@ -13,13 +13,13 @@ class Kernel
      * @var array
      */
     public $commands = [
-        Commands\MakeModule::class,
+        Commands\Make\ModuleMakeCommand::class,
         Commands\ModuleEnable::class,
         Commands\ModuleDisable::class,
         Commands\ModuleDelete::class,
         Commands\ModuleUninstall::class,
         Commands\ModuleInstall::class,
-        Commands\MakeService::class,
+        Commands\Make\ServiceMakeCommand::class,
     ];
 
     /**

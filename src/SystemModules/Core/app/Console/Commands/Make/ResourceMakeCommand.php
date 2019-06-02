@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Database\Console\Factories\FactoryMakeCommand;
+use Illuminate\Foundation\Console\ResourceMakeCommand as BaseResourceMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeFactory extends FactoryMakeCommand
+class ResourceMakeCommand extends BaseResourceMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeFactory extends FactoryMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\database\\factories";
+            return $rootNamespace . "\\$moduleName\App\Http\Resources";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

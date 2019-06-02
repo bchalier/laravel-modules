@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Foundation\Console\ConsoleMakeCommand as BaseConsoleMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeCommand extends BaseConsoleMakeCommand
+class ConsoleMakeCommand extends BaseConsoleMakeCommand
 {
     use ExtendMakeCommand;
 

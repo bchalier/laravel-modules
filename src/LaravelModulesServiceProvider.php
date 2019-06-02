@@ -17,7 +17,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $modules = ModulesManager::getActiveModules();
+        $modules = ModulesManager::getModulesToLoad();
 
         foreach ($modules as $module) {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\ListenerMakeCommand;
+use Illuminate\Routing\Console\MiddlewareMakeCommand as BaseMiddlewareMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeListener extends ListenerMakeCommand
+class MiddlewareMakeCommand extends BaseMiddlewareMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeListener extends ListenerMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Listener";
+            return $rootNamespace . "\\$moduleName\App\Http\Middleware";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

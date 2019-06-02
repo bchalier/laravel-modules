@@ -28,7 +28,7 @@ class ModulesManager
         $this->files = $files;
     }
 
-    public function getActiveModules()
+    public function getModulesToLoad()
     {
         if (!Schema::hasTable('modules')) {
             $this->install('vendor/bchalier/laravel-modules/src/SystemModules/Core/');

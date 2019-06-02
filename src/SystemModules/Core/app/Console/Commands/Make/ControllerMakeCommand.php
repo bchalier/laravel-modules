@@ -1,13 +1,13 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Routing\Console\ControllerMakeCommand;
+use Illuminate\Routing\Console\ControllerMakeCommand as BaseControllerMakeCommand;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeController extends ControllerMakeCommand
+class ControllerMakeCommand extends BaseControllerMakeCommand
 {
     use ExtendMakeCommand;
 

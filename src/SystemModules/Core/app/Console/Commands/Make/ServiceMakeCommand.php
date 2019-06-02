@@ -1,13 +1,13 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeService extends GeneratorCommand
+class ServiceMakeCommand extends GeneratorCommand
 {
     use ExtendMakeCommand;
     
@@ -39,7 +39,7 @@ class MakeService extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/stubs/service.stub';
+        return __DIR__ . '/stubs/service.stub';
     }
     
     /**

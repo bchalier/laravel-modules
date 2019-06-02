@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\RequestMakeCommand;
+use Illuminate\Database\Console\Factories\FactoryMakeCommand as BaseFactoryMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeRequest extends RequestMakeCommand
+class FactoryMakeCommand extends BaseFactoryMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeRequest extends RequestMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Http\Requests";
+            return $rootNamespace . "\\$moduleName\database\\factories";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

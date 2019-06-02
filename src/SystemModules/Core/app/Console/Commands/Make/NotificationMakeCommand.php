@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Routing\Console\MiddlewareMakeCommand;
+use Illuminate\Foundation\Console\NotificationMakeCommand as BaseNotificationMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeMiddleware extends MiddlewareMakeCommand
+class NotificationMakeCommand extends BaseNotificationMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeMiddleware extends MiddlewareMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Http\Middleware";
+            return $rootNamespace . "\\$moduleName\App\Notification";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

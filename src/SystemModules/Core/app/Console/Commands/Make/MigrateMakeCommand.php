@@ -1,13 +1,13 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
+use Illuminate\Database\Console\Migrations\MigrateMakeCommand as BaseMigrateMakeCommand;
 use Illuminate\Support\Composer;
 use Illuminate\Database\Migrations\MigrationCreator;
 use SystemModules\Core\App\Models\Module;
 
-class MakeMigration extends MigrateMakeCommand
+class MigrateMakeCommand extends BaseMigrateMakeCommand
 {
     /** @var Module */
     protected $module;

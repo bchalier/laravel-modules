@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\JobMakeCommand;
+use Illuminate\Foundation\Console\ExceptionMakeCommand as BaseExceptionMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeJob extends JobMakeCommand
+class ExceptionMakeCommand extends BaseExceptionMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeJob extends JobMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Jobs";
+            return $rootNamespace . "\\$moduleName\App\Exceptions";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\MailMakeCommand;
+use Illuminate\Foundation\Console\ListenerMakeCommand as BaseListenerMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeMail extends MailMakeCommand
+class ListenerMakeCommand extends BaseListenerMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeMail extends MailMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Mail";
+            return $rootNamespace . "\\$moduleName\App\Listener";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

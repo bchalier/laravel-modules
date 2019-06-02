@@ -1,12 +1,12 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\ModelMakeCommand;
+use Illuminate\Foundation\Console\ModelMakeCommand as BaseModelMakeCommand;
 use Illuminate\Support\Str;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeModel extends ModelMakeCommand
+class ModelMakeCommand extends BaseModelMakeCommand
 {
     use ExtendMakeCommand;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\EventMakeCommand;
+use Illuminate\Foundation\Console\RequestMakeCommand as BaseRequestMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeEvent extends EventMakeCommand
+class RequestMakeCommand extends BaseRequestMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeEvent extends EventMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Events";
+            return $rootNamespace . "\\$moduleName\App\Http\Requests";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }

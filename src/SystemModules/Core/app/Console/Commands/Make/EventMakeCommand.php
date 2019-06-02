@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Foundation\Console\NotificationMakeCommand;
+use Illuminate\Foundation\Console\EventMakeCommand as BaseEventMakeCommand;
 use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
 
-class MakeNotification extends NotificationMakeCommand
+class EventMakeCommand extends BaseEventMakeCommand
 {
     use ExtendMakeCommand;
 
@@ -20,7 +20,7 @@ class MakeNotification extends NotificationMakeCommand
         if ($this->module) {
             $moduleName = $this->module->name;
 
-            return $rootNamespace . "\\$moduleName\App\Notification";
+            return $rootNamespace . "\\$moduleName\App\Events";
         } else {
             return parent::getDefaultNamespace($rootNamespace);
         }
