@@ -32,7 +32,7 @@ class ConsoleMakeCommand extends BaseConsoleMakeCommand
      */
     protected function getKernelStub()
     {
-        return base_path('vendor/bchalier/laravel-modules/src/SystemModules/Core/app/Console/Commands/stubs/console-kernel.stub');
+        return __DIR__ . '/../stubs/console_kernel.stub';
     }
 
     /**

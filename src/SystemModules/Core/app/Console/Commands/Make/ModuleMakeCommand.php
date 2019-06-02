@@ -137,7 +137,7 @@ class ModuleMakeCommand extends Command
      */
     protected function getConfigStub()
     {
-        return __DIR__ . '/stubs/module_config.stub';
+        return __DIR__ . '/../stubs/module_config.stub';
     }
     
     /**
@@ -148,10 +148,10 @@ class ModuleMakeCommand extends Command
     protected function getRoutesStub()
     {
         return [
-            'api' => __DIR__ . '/stubs/route_api.stub',
-            'channels' => __DIR__ . '/stubs/route_channels.stub',
-            'console' => __DIR__ . '/stubs/route_console.stub',
-            'web' => __DIR__ . '/stubs/route_web.stub',
+            'api' => __DIR__ . '/../stubs/route_api.stub',
+            'channels' => __DIR__ . '/../stubs/route_channels.stub',
+            'console' => __DIR__ . '/../stubs/route_console.stub',
+            'web' => __DIR__ . '/../stubs/route_web.stub',
         ];
     }
     
@@ -162,7 +162,7 @@ class ModuleMakeCommand extends Command
      */
     protected function getSeederStub()
     {
-        return __DIR__ . '/stubs/database_seeder.stub';
+        return __DIR__ . '/../stubs/database_seeder.stub';
     }
     
     /**
