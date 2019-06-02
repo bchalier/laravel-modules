@@ -1,9 +1,20 @@
 {
   "name": "DummyName",
-  "alias": "DummyAlias",
   "description": "A perfect description for a brand new module !",
-  "keywords": [],
-  "install": {
-    "migrate": true
+  "keywords": [
+    "module",
+    "laravel"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^7.1"
+  },
+  "extra": {
+    "laravel-modules": {
+      "alias": "DummyAlias",
+      "install": {
+        "migrate": true
+      }
+    }
   }
 }

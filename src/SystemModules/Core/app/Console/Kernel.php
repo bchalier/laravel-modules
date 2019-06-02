@@ -17,6 +17,8 @@ class Kernel
         Commands\ModuleEnable::class,
         Commands\ModuleDisable::class,
         Commands\ModuleDelete::class,
+        Commands\ModuleUninstall::class,
+        Commands\ModuleInstall::class,
         Commands\MakeService::class,
     ];
 

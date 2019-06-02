@@ -112,17 +112,24 @@ class Module extends Model
     }
 
     /**
+     * Uninstall the module
+     *
+     * @return bool|\SystemModules\Core\App\Services\ModulesManager
+     * @throws \Exception
+     */
+    public function uninstall()
+    {
+        return parent::delete() ? ModulesManager::uninstall($this) : false;
+    }
+
+    /**
      * Delete the module
      *
-     * @return boolean
+     * @return bool|\SystemModules\Core\App\Services\ModulesManager|null
      * @throws \Exception
      */
     public function delete()
     {
-        if (parent::delete()) {
-            return ModulesManager::delete($this);
-        } else {
-            return false;
-        }
+        return parent::delete() ? ModulesManager::delete($this) : false;
     }
 }

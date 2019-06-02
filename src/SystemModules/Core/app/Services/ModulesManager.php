@@ -5,6 +5,7 @@ namespace SystemModules\Core\App\Services;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
+use League\Flysystem\FileNotFoundException;
 use SystemModules\Core\App\Models\Module;
 
 class ModulesManager
@@ -36,14 +37,22 @@ class ModulesManager
         return Module::where('active', true)->get();
     }
 
+    /**
+     * @param      $path
+     * @param bool $disabled
+     * @return bool
+     * @throws FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
     public function install($path, $disabled = false)
     {
-        $configFile = base_path($path . 'module.json');
+        $configFile = base_path($path . 'composer.json');
 
         if (!file_exists($configFile))
-            abort(400);
+            throw new FileNotFoundException($configFile);
 
-        $config = json_decode($this->files->get($configFile), true);
+        $configFile = json_decode($this->files->get($configFile), true);
+        $config = $configFile['extra']['laravel-modules'];
 
         // migrate migrations
         if ($config['install']['migrate'])
@@ -58,12 +67,15 @@ class ModulesManager
 //                $this->files->put($config['install']['createDir'] . '/.gitkeep', ''); not sure about that
             }
 
+        // adding to composer
+        exec('composer config repositories.modules path \'modules/*\'');
+        exec('composer require ' . $configFile['name']);
+
         // registering module
         $module = new Module;
 
-        $module->name = $config['name'];
+        $module->name = $configFile['name'];
         $module->alias = $config['alias'];
-        $module->keywords = $config['keywords'];
         $module->path = $path;
 
         if ($disabled)
@@ -75,7 +87,17 @@ class ModulesManager
             else
                 $module->$item = [];
 
-        $module->save();
+        return $module->save();
+    }
+
+    /**
+     * @param Module $module
+     * @return bool
+     */
+    public function uninstall(Module $module)
+    {
+        exec('composer remove ' . $module->name);
+        return true;
     }
 
     /**
@@ -86,6 +108,7 @@ class ModulesManager
      */
     public function delete(Module $module)
     {
+        $this->uninstall($module);
         return $this->files->deleteDirectory(base_path($module->path));
     }
 }

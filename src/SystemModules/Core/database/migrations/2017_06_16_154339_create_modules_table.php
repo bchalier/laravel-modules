@@ -17,7 +17,6 @@ class CreateModulesTable extends Migration
             $table->increments('id');
             $table->string('name', 20)->unique();
             $table->string('alias', 20)->unique();
-            $table->text('keywords'); // TODO json
             $table->string('path', 150)->unique();
             $table->text('loadParameters')->nullable(); // TODO json
             $table->text('providers')->nullable(); // TODO json

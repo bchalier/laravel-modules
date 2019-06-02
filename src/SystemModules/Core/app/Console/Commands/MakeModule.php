@@ -120,7 +120,6 @@ class MakeModule extends Command
         
         ModulesManager::install($relativePath, true);
         
-        $this->makeDirectory($path . 'routes');
         $this->makeRoutes($path);
         $this->makeDatabaseDirectory($module, $path);
 
@@ -245,17 +244,18 @@ class MakeModule extends Command
         $stub = $this->files->get($this->getConfigStub());
         $this->replaceAlias($stub, strtolower($module))->replaceName($stub, $module);
         
-        $this->files->put($path . '/module.json', $stub);
+        $this->files->put($path . '/composer.json', $stub);
     }
     
     /**
-     * Create the 4 routes files.
+     * Create the the routes files.
      *
      * @param $path
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function makeRoutes($path)
     {
+        $this->makeDirectory($path . 'routes');
         $stubsPath = $this->getRoutesStub();
         
         foreach ($stubsPath as $route => $stubPath) {

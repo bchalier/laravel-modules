@@ -4,10 +4,7 @@
     "keywords": ["laravel", "modules"],
     "license": "MIT",
     "authors": [
-        {
-            "name": "Bastien Chalier",
-            "email": "bastien@chalier.io"
-        }
+        {"name": "Bastien Chalier", "email": "bastien@chalier.io"}
     ],
     "require": {
         "php": ">=7.0.0",
