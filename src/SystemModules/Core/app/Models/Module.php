@@ -132,4 +132,9 @@ class Module extends Model
     {
         return parent::delete() ? ModulesManager::delete($this) : false;
     }
+
+    public function path($path)
+    {
+        return $this->path . $path;
+    }
 }

@@ -3,3 +3,7 @@ liste des commandes :
 - module:enable {modules*}
 - module:disable {modules*}
 - module:make-command {name} {--M|module=} {?--command=null}
+
+.env
+API_PREFIX
+WEB_PREFIX

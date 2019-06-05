@@ -29,6 +29,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
             $this->loadRoutes($module);
             $this->loadTranslations($module);
             $this->loadViews($module);
+            $this->loadConfig($module);
 
         }
     }
@@ -114,13 +115,14 @@ class LaravelModulesServiceProvider extends ServiceProvider
             $namespace = 'Modules\\' . $module->name . '\App\Http\Controllers';
 
         // API routes
-        Route::prefix('api')
+        Route::prefix(config('routing.prefix.api'))
             ->middleware('api')
             ->namespace($namespace)
             ->group(base_path($module->path . 'routes/api.php'));
 
         // web routes
-        Route::middleware('web')
+        Route::prefix(config('routing.prefix.web'))
+            ->middleware('web')
             ->namespace($namespace)
             ->group(base_path($module->path . 'routes/web.php'));
 
@@ -149,5 +151,22 @@ class LaravelModulesServiceProvider extends ServiceProvider
     protected function loadViews(Module $module)
     {
         $this->loadViewsFrom(base_path($module->path . 'resources/views'), $module->alias);
+    }
+
+    /**
+     * Load all config files if config directory
+     *
+     * @param Module $module
+     */
+    protected function loadConfig(Module $module)
+    {
+        if ($this->app['files']->isDirectory($module->path('config'))) {
+            /** @var \Symfony\Component\Finder\SplFileInfo $configFile */
+            foreach ($this->app['files']->files($module->path('config')) as $configFile) {
+                $this->mergeConfigFrom(
+                    $configFile->getRealPath(), $configFile->getFilenameWithoutExtension()
+                );
+            }
+        }
     }
 }
