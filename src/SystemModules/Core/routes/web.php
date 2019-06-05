@@ -10,10 +10,3 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('test', function () {
-//    Artisan::call('list');
-//    echo '<pre>',print_r(Artisan::output(),1),'</pre>';
-
-    dd();
-});
