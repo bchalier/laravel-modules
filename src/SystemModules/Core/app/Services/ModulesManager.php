@@ -79,9 +79,9 @@ class ModulesManager
 //                $this->files->put($config['install']['createDir'] . '/.gitkeep', ''); not sure about that
             }
 
-        // adding to composer
+        // adding composer module repository
         exec('composer config repositories.modules path \'modules/*\'');
-        exec('composer require ' . $configFile['name']);
+//        exec('composer require ' . $configFile['name']); // don't install by default for now
 
         // registering module
         $module = new Module;
@@ -108,7 +108,7 @@ class ModulesManager
      */
     public function uninstall(Module $module)
     {
-        exec('composer remove ' . $module->name);
+//        exec('composer remove ' . $module->name);
         return true;
     }
 
