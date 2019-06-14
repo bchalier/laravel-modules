@@ -80,8 +80,7 @@ class ModulesManager
             }
 
         // adding composer module repository
-        exec('composer config repositories.modules path \'modules/*\'');
-//        exec('composer require ' . $configFile['name']); // don't install by default for now
+        exec('composer config extra.merge-plugin.include \'modules/*/composer.json\'');
 
         // registering module
         $module = new Module;
@@ -103,16 +102,6 @@ class ModulesManager
     }
 
     /**
-     * @param Module $module
-     * @return bool
-     */
-    public function uninstall(Module $module)
-    {
-//        exec('composer remove ' . $module->name);
-        return true;
-    }
-
-    /**
      * Delete the specified module dir
      *
      * @param Module $module
@@ -120,7 +109,6 @@ class ModulesManager
      */
     public function delete(Module $module)
     {
-        $this->uninstall($module);
         return $this->files->deleteDirectory(base_path($module->path));
     }
 }

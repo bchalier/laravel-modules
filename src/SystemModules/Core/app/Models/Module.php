@@ -119,7 +119,7 @@ class Module extends Model
      */
     public function uninstall()
     {
-        return parent::delete() ? ModulesManager::uninstall($this) : false;
+        return parent::delete();
     }
 
     /**
