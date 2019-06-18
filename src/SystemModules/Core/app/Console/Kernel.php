@@ -19,6 +19,7 @@ class Kernel
         Commands\Module\ModuleDelete::class,
         Commands\Module\ModuleUninstall::class,
         Commands\Module\ModuleInstall::class,
+        Commands\Module\ModuleReinstall::class,
         Commands\Make\ServiceMakeCommand::class,
     ];
 

@@ -41,7 +41,7 @@ class ModuleInstall extends Command
             $relativePath = "modules/$moduleName/";
 
             if (ModulesManager::install($relativePath)) {
-                $this->info("Module $moduleName uninstalled successfully!");
+                $this->info("Module $moduleName installed successfully!");
             } else {
                 $this->error("An error occurred while uninstalling the module $moduleName.");
             }

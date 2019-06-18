@@ -12,7 +12,7 @@ class ModuleUninstall extends Command
      *
      * @var string
      */
-    protected $signature = 'module:uninstall {modules*}';
+    protected $signature = 'module:uninstall {modules*} {--f|force}';
 
     /**
      * The console command description.
@@ -41,7 +41,7 @@ class ModuleUninstall extends Command
                 continue;
             }
 
-            if ($this->confirm("Do you really want to uninstall the $module->name module ?")) {
+            if ($this->option('force') || $this->confirm("Do you really want to uninstall the $module->name module ?")) {
                 if ($module->uninstall()) {
                     $this->info("Module $module->name uninstalled successfully!");
                 } else {
