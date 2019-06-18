@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands;
+namespace SystemModules\Core\App\Console\Commands\Module;
 
 use Illuminate\Console\Command;
 use SystemModules\Core\App\Facades\ModulesManager;

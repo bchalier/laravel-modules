@@ -14,11 +14,11 @@ class Kernel
      */
     public $commands = [
         Commands\Make\ModuleMakeCommand::class,
-        Commands\ModuleEnable::class,
-        Commands\ModuleDisable::class,
-        Commands\ModuleDelete::class,
-        Commands\ModuleUninstall::class,
-        Commands\ModuleInstall::class,
+        Commands\Module\ModuleEnable::class,
+        Commands\Module\ModuleDisable::class,
+        Commands\Module\ModuleDelete::class,
+        Commands\Module\ModuleUninstall::class,
+        Commands\Module\ModuleInstall::class,
         Commands\Make\ServiceMakeCommand::class,
     ];
 
