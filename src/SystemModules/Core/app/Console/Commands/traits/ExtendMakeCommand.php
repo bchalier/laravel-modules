@@ -25,11 +25,11 @@ trait ExtendMakeCommand
                 return false;
             }
         }
-        
+
         $return = parent::handle();
-        
-        if (method_exists($this, 'afterHandle')) {
-            $this->afterHandle();
+
+        if (method_exists($this, 'afterHandle') && $return !== false) {
+            $return = $this->afterHandle();
         }
         
         return $return;

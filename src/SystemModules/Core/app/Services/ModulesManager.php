@@ -3,9 +3,11 @@
 namespace SystemModules\Core\App\Services;
 
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use League\Flysystem\FileNotFoundException;
+use Localheinz\Json\Printer\Printer;
 use SystemModules\Core\App\Models\Module;
 
 class ModulesManager
@@ -99,6 +101,29 @@ class ModulesManager
                 $module->$item = [];
 
         return $module->save();
+    }
+
+    /**
+     * Update the module config in composer.json under extra.laravel-modules.
+     *
+     * @param Module $module
+     * @param        $key
+     * @param        $value
+     * @return bool
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    public function setConfig(Module $module, $key, $value)
+    {
+        $printer = new Printer();
+
+        $configFilePath = $module->path('composer.json');
+        $configFile = $this->files->get($configFilePath);
+
+        $config = json_decode($configFile, true);
+
+        Arr::set($config, 'extra.laravel-modules.' . $key, $value);
+
+        return $this->files->put($configFilePath, $printer->print(json_encode($config), '  '));
     }
 
     /**

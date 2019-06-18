@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemModules\Core\Providers;
+namespace SystemModules\Core\App\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

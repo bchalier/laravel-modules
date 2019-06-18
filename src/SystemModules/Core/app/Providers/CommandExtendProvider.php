@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemModules\Core\Providers;
+namespace SystemModules\Core\App\Providers;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +18,7 @@ use SystemModules\Core\App\Console\Commands\Make\MiddlewareMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\MigrateMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ModelMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\NotificationMakeCommand;
+use SystemModules\Core\App\Console\Commands\Make\ProviderMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\SeederMakeCommand;
@@ -55,7 +56,7 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
         'NotificationMake' => 'command.notification.make',
 //        'ObserverMake' => 'command.observer.make',
 //        'PolicyMake' => 'command.policy.make',
-//        'ProviderMake' => 'command.provider.make',
+        'ProviderMake' => 'command.provider.make',
         'RequestMake' => 'command.request.make',
         'ResourceMake' => 'command.resource.make',
 //        'RuleMake' => 'command.rule.make',

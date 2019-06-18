@@ -9,7 +9,8 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/framework": "5.*",
-        "wikimedia/composer-merge-plugin": "^1.4"
+        "wikimedia/composer-merge-plugin": "^1.4",
+        "localheinz\/json-printer": "^2.0"
     },
     "autoload": {
         "psr-4": {

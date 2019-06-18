@@ -35,7 +35,7 @@ class ModuleMakeCommand extends Command
         'notification',
 //        'observer',
 //        'policy',
-//        'provider',
+        'provider',
         'request',
         'resource',
 //        'rule',

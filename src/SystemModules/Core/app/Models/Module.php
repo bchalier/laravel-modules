@@ -55,6 +55,18 @@ class Module extends Model
     }
 
     /**
+     * Update the module config in composer.json under extra.laravel-modules.
+     *
+     * @param $config
+     * @param $value
+     * @return bool
+     */
+    public function setConfig($config, $value)
+    {
+        return ModulesManager::setConfig($this, $config, $value);
+    }
+
+    /**
      * Return true if the module is active
      *
      * @return boolean
