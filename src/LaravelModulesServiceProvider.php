@@ -77,7 +77,9 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadFactories(Module $module)
     {
-        $this->app->make('Illuminate\Database\Eloquent\Factory')->load($module->path . '/database/factories');
+        if (class_exists('Faker\Factory')) {
+            $this->app->make('Illuminate\Database\Eloquent\Factory')->load($module->path . '/database/factories');
+        }
     }
 
     /**
