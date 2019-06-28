@@ -21,6 +21,7 @@ use SystemModules\Core\App\Console\Commands\Make\NotificationMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ProviderMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
+use SystemModules\Core\App\Console\Commands\Make\RuleMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\SeederMakeCommand;
 
 
@@ -59,7 +60,7 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
         'ProviderMake' => 'command.provider.make',
         'RequestMake' => 'command.request.make',
         'ResourceMake' => 'command.resource.make',
-//        'RuleMake' => 'command.rule.make',
+        'RuleMake' => 'command.rule.make',
         'SeederMake' => 'command.seeder.make',
 //        'TestMake' => 'command.test.make',
     ];
