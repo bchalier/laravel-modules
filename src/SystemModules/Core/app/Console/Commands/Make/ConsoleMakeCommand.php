@@ -21,7 +21,7 @@ class ConsoleMakeCommand extends BaseConsoleMakeCommand
             $stub = $this->files->get($this->getKernelStub());
             $this->replaceModule($stub, $module)->replaceClassName($stub, $className);
 
-            $this->files->put($this->module->path.'App/Console/Kernel.php', $stub);
+            $this->files->put($this->module->path.'app/Console/Kernel.php', $stub);
         }
     }
 

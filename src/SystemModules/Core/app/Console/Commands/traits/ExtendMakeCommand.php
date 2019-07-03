@@ -79,7 +79,9 @@ trait ExtendMakeCommand
     protected function getPath($name)
     {
         if (!empty($this->option('module'))) {
-            return $this->laravel->basePath().'/'.str_replace('\\', '/', lcfirst($name)).'.php';
+            $name = Str::replaceFirst($this->rootNamespace(), strtolower($this->rootNamespace()), $name);
+
+            return base_path().'/'.str_replace('\\', '/', lcfirst($name)).'.php';
         } else {
             return parent::getPath($name);
         }
