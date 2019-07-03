@@ -41,7 +41,7 @@ class ModuleMakeCommand extends Command
 //        'rule',
         'seeder',
         'service',
-//        'test',
+        'test',
     ];
 
     /**

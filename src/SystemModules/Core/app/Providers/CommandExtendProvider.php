@@ -24,6 +24,7 @@ use SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\RuleMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\SeederMakeCommand;
+use SystemModules\Core\App\Console\Commands\Make\TestMakeCommand;
 
 
 class CommandExtendProvider extends ServiceProvider implements DeferrableProvider
@@ -63,7 +64,7 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
         'ResourceMake' => 'command.resource.make',
         'RuleMake' => 'command.rule.make',
         'SeederMake' => 'command.seeder.make',
-//        'TestMake' => 'command.test.make',
+        'TestMake' => 'command.test.make',
     ];
 
     /**
