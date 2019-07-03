@@ -19,6 +19,8 @@ use SystemModules\Core\App\Console\Commands\Make\MiddlewareMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\MigrateMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ModelMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\NotificationMakeCommand;
+use SystemModules\Core\App\Console\Commands\Make\ObserverMakeCommand;
+use SystemModules\Core\App\Console\Commands\Make\PolicyMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ProviderMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
@@ -57,8 +59,8 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
         'MigrateMake' => 'command.migrate.make',
         'ModelMake' => 'command.model.make',
         'NotificationMake' => 'command.notification.make',
-//        'ObserverMake' => 'command.observer.make',
-//        'PolicyMake' => 'command.policy.make',
+        'ObserverMake' => 'command.observer.make',
+        'PolicyMake' => 'command.policy.make',
         'ProviderMake' => 'command.provider.make',
         'RequestMake' => 'command.request.make',
         'ResourceMake' => 'command.resource.make',
