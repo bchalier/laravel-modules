@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
 use SystemModules\Core\App\Console\Commands\Database\SeedCommand;
+use SystemModules\Core\App\Console\Commands\Make\ChannelMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ConsoleMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\ControllerMakeCommand;
 use SystemModules\Core\App\Console\Commands\Make\EventMakeCommand;
@@ -42,7 +43,7 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
      * @var array
      */
     protected $devCommands = [
-//        'ChannelMake' => 'command.channel.make',
+        'ChannelMake' => 'command.channel.make',
         'ConsoleMake' => 'command.console.make',
         'ControllerMake' => 'command.controller.make',
         'EventMake' => 'command.event.make',
