@@ -5,6 +5,22 @@ namespace SystemModules\Core\App\Models;
 use Illuminate\Database\Eloquent\Model;
 use SystemModules\Core\App\Facades\ModulesManager;
 
+/**
+ * Class Module
+ *
+ * @package SystemModules\Core\App\Models
+ *
+ * @property integer $id
+ * @property string $name
+ * @property string $alias
+ * @property string $path
+ * @property string $loadParameters
+ * @property string $providers
+ * @property string $aliases
+ * @property bool $active
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class Module extends Model
 {
     /**
