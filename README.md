@@ -1,6 +1,6 @@
 # Divide your laravel application in modules, the laravel way
 
-### Intro
+### Introduction
 
 This package is made to allow you to divide everything laravel allow you to make but divided in modules.
 
@@ -10,6 +10,13 @@ so after trying 3-4 modules I got frustrated and starting making my own package 
 
 Here are the result, I hove you will like it as much as I do !
 This is my first public package so please fell free to send me any suggestions, questions, bug report, feature request you may have !
+
+### Installation
+
+You can install the package via composer:
+``` 
+composer require bchalier/laravel-modules
+```
 
 ### Commands
 
