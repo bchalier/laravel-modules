@@ -1,7 +1,14 @@
 {
     "name": "bchalier/laravel-modules",
     "description": "Module management in laravel.",
-    "keywords": ["laravel", "modules"],
+    "keywords": [
+        "laravel",
+        "modules",
+        "module",
+        "bchalier",
+        "split",
+        "package"
+    ],
     "license": "MIT",
     "authors": [
         {"name": "Bastien Chalier", "email": "bastien@chalier.io"}
