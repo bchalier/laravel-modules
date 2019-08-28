@@ -11,6 +11,7 @@
   },
   "extra": {
     "laravel-modules": {
+      "name": "DummyName",
       "alias": "DummyAlias",
       "install": {
         "migrate": true

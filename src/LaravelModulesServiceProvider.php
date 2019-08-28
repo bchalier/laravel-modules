@@ -2,35 +2,39 @@
 
 namespace Bchalier\Modules;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
-use SystemModules\Core\App\Facades\ModulesManager;
 use SystemModules\Core\App\Models\Module;
 
 class LaravelModulesServiceProvider extends ServiceProvider
 {
     /**
      * Load all laravel components for each module.
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot()
     {
-        $modules = ModulesManager::getActiveModules(true);
+        $this->loadAll(Module::system());
+        $this->loadAll(Module::where('active', true));
+    }
 
+    /**
+     * @param Collection $modules
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function loadAll(Collection $modules)
+    {
         foreach ($modules as $module) {
-
+            $this->loadConfig($module);
+            $this->loadProviders($module);
             $this->loadAliases($module);
-            $this->loadConsole($module);
             $this->loadFactories($module);
             $this->loadMigrations($module);
-            $this->loadProviders($module);
+            $this->loadConsole($module);
             $this->loadRoutes($module);
             $this->loadTranslations($module);
             $this->loadViews($module);
-            $this->loadConfig($module);
-
         }
     }
 

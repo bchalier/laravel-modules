@@ -14,10 +14,11 @@
         {"name": "Bastien Chalier", "email": "bastien@chalier.io"}
     ],
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1",
         "laravel/framework": "5.*",
         "wikimedia/composer-merge-plugin": "^1.4",
-        "localheinz\/json-printer": "^2.0"
+        "localheinz\/json-printer": "^2.0",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

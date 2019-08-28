@@ -2,51 +2,30 @@
 
 namespace SystemModules\Core\App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use SystemModules\Core\App\Facades\ModulesManager;
 
-/**
- * Class Module
- *
- * @package SystemModules\Core\App\Models
- *
- * @property integer $id
- * @property string $name
- * @property string $alias
- * @property string $path
- * @property string $loadParameters
- * @property string $providers
- * @property string $aliases
- * @property bool $active
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- */
-class Module extends Model
+class Module
 {
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'name' => 'string',
-        'alias' => 'string',
-        'keywords' => 'array',
-        'path' => 'string',
-        'loadParameters' => 'array',
-        'providers' => 'array',
-        'aliases' => 'array',
-        'active' => 'boolean',
-    ];
+    public $name;
+    public $alias;
+    public $path;
+    public $loadParameters;
+    public $providers = [];
+    public $aliases = [];
+    public $active;
 
-    /**
-     * The list of the system modules aliases, this modules can't be altered.
-     *
-     * @var array
-     */
-    const SYS_MODULES = [
-        'core',
-    ];
+    public $isSystem = false;
+
+    public function __construct(array $config = [])
+    {
+        foreach ($config as $key => $param) {
+            if (property_exists($this, $key)) {
+                $this->$key = $param;
+            }
+        }
+    }
 
     /**
      * Execute a query for a single record by alias.
@@ -54,20 +33,49 @@ class Module extends Model
      * @param $alias string
      * @return Module
      */
-    public static function findAlias($alias)
+    public static function findAlias($alias): ?Module
     {
-        return static::where('alias', $alias)->first();
+        return self::where('alias', strtolower($alias))->first();
     }
 
-    /**
-     * Execute a query for a single record by alias or throw an exception.
-     *
-     * @param $alias string
-     * @return Module
-     */
-    public static function findAliasOrFail($alias)
+    public static function where(string $key, $value): Collection
     {
-        return static::where('alias', $alias)->firstOrFail();
+        return self::all()->where($key, $value);
+    }
+
+    public static function all(): Collection
+    {
+        return self::loadFromConfig(ModulesManager::getModulesConfig());
+    }
+
+    public static function system(): Collection
+    {
+        return self::loadFromConfig(ModulesManager::getSystemModulesConfig(), true);
+    }
+
+    protected static function loadFromConfig(array $config, bool $isSystem = false): Collection
+    {
+        $modules = [];
+
+        foreach ($config as $moduleConfig) {
+            if ($moduleConfig['path']) {
+                $module = self::loadFromPath($moduleConfig);
+                $module->isSystem = $isSystem;
+                $modules[] = $module;
+            }
+        }
+
+        return collect($modules);
+    }
+
+    protected static function loadFromPath(array $config): Module
+    {
+        $configFilePath = base_path($config['path'] . 'composer.json');
+        $configFile = file_get_contents($configFilePath);
+        $moduleConfig = json_decode($configFile, true);
+        $config = array_merge($config, Arr::get($moduleConfig, 'extra.laravel-modules'));
+
+        return new Module($config);
     }
 
     /**
@@ -77,9 +85,21 @@ class Module extends Model
      * @param $value
      * @return bool
      */
-    public function setConfig($config, $value)
+    public function setConfig($config, $value): bool
     {
         return ModulesManager::setConfig($this, $config, $value);
+    }
+
+    /**
+     * Set path in global config
+     *
+     * @param $path
+     * @return mixed
+     */
+    public function setPath($path): bool
+    {
+        $this->path = $path;
+        return ModulesManager::setGlobalConfig($this->alias, 'path', $path);
     }
 
     /**
@@ -87,12 +107,9 @@ class Module extends Model
      *
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
-        if ($this->active)
-            return true;
-        else
-            return false;
+        return $this->active;
     }
 
     /**
@@ -100,9 +117,9 @@ class Module extends Model
      *
      * @return boolean
      */
-    public function isSystem()
+    public function isSystem(): bool
     {
-        return in_array($this->getAlias(), self::SYS_MODULES);
+        return $this->isSystem;
     }
 
     /**
@@ -110,7 +127,7 @@ class Module extends Model
      *
      * @return string
      */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
@@ -120,11 +137,10 @@ class Module extends Model
      *
      * @return boolean
      */
-    public function enable()
+    public function enable(): bool
     {
         $this->active = true;
-
-        return $this->save();
+        return ModulesManager::setGlobalConfig($this->alias, 'active', true);
     }
 
     /**
@@ -132,11 +148,10 @@ class Module extends Model
      *
      * @return boolean
      */
-    public function disable()
+    public function disable(): bool
     {
         $this->active = false;
-
-        return $this->save();
+        return ModulesManager::setGlobalConfig($this->alias, 'active', false);
     }
 
     /**
@@ -145,9 +160,9 @@ class Module extends Model
      * @return bool|\SystemModules\Core\App\Services\ModulesManager
      * @throws \Exception
      */
-    public function uninstall()
+    public function uninstall(): bool
     {
-        return parent::delete();
+        return ModulesManager::dropGlobalConfig($this->alias);
     }
 
     /**
@@ -156,12 +171,16 @@ class Module extends Model
      * @return bool|\SystemModules\Core\App\Services\ModulesManager|null
      * @throws \Exception
      */
-    public function delete()
+    public function delete(): bool
     {
-        return parent::delete() ? ModulesManager::delete($this) : false;
+        return self::uninstall() ? ModulesManager::delete($this) : false;
     }
 
-    public function path($path)
+    /**
+     * @param $path
+     * @return string
+     */
+    public function path($path): string
     {
         return $this->path . $path;
     }
