@@ -3,7 +3,7 @@
 return [
 
     'config' => [
-        'path' => env('MODULES_CONFIG_PATH', 'modules.json'),
+        'path' => base_path(env('MODULES_CONFIG_PATH', 'modules.json')),
     ],
 
 ];

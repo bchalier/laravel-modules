@@ -192,6 +192,6 @@ class Module
      */
     public function path($path): string
     {
-        return $this->path . $path;
+        return base_path($this->path . $path);
     }
 }
