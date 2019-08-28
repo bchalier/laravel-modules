@@ -156,7 +156,7 @@ At the root of your module you have a composer.json, same as the one you know wi
 ```
 
 Here what that mean :
-- **name** : literally whatever you want, simply a cosmetic value in database.
+- **name** : literally whatever you want, simply a cosmetic value.
 - **alias** : this is what you will be using in every command.
 - **description** : a description, duh.
 - **install.migrate** : migrate the migrations on module installation.
@@ -174,6 +174,8 @@ Here are some settings added that may be used in your .env :
 ```
 API_PREFIX='web' // a prefix for all the web routes, '' by default
 WEB_PREFIX='api' // a prefix for all the api routes, 'api' by default
+
+MODULES_CONFIG_PATH='modules.json' // the location of the global config file (it store the installed modules)
 ```
 
 That's pretty much it, there probably plenty of room for improvement so I'm waiting your comments on this !
