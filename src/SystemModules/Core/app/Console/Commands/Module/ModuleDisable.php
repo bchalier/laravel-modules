@@ -37,19 +37,19 @@ class ModuleDisable extends Command
             }
 
             if ($module->isSystem()) {
-                $this->error("Module $module->name is a system module and cannot be disabled.");
+                $this->error("Module {$module->getNameOrAlias()} is a system module and cannot be disabled.");
                 continue;
             }
 
             if (!$module->isActive()) {
-                $this->info("Module $module->name is already disabled.");
+                $this->info("Module {$module->getNameOrAlias()} is already disabled.");
                 continue;
             }
 
             if ($module->disable())
-                $this->info("Module $module->name disabled successfully!");
+                $this->info("Module {$module->getNameOrAlias()} disabled successfully!");
             else
-                $this->error("An error occurred while disabling the module $module->name");
+                $this->error("An error occurred while disabling the module {$module->getNameOrAlias()}");
         }
     }
 }

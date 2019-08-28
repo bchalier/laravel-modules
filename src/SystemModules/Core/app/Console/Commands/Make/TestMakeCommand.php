@@ -51,7 +51,7 @@ class TestMakeCommand extends BaseTestMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
             $rootNamespace = $rootNamespace . "\\$moduleName\Tests";
 
             if ($this->option('unit')) {

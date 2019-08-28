@@ -132,6 +132,16 @@ class Module
         return $this->alias;
     }
 
+    public function getNameOrAlias(): string
+    {
+        return $this->name ?? $this->alias;
+    }
+
+    public function getBaseNamespace(): string
+    {
+        return ucfirst($this->alias);
+    }
+
     /**
      * Enable the module
      *

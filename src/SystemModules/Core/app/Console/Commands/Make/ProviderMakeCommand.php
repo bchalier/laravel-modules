@@ -18,7 +18,7 @@ class ProviderMakeCommand extends BaseProviderMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Providers";
         } else {
@@ -32,7 +32,7 @@ class ProviderMakeCommand extends BaseProviderMakeCommand
         $class = $this->qualifyClass($className);
 
         if ($this->module->setConfig("providers.$className", $class)) {
-            $this->info("Provider $className added to module " . $this->module->name . "'s composer.json");
+            $this->info("Provider $className added to module {$this->module->getNameOrAlias()}'s composer.json");
         }
     }
 }

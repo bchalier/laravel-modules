@@ -18,7 +18,7 @@ class FactoryMakeCommand extends BaseFactoryMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\database\\factories";
         } else {

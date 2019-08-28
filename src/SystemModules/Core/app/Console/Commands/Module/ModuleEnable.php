@@ -37,14 +37,14 @@ class ModuleEnable extends Command
             }
 
             if ($module->isActive()) {
-                $this->info("Module $module->name is already active.");
+                $this->info("Module {$module->getNameOrAlias()} is already active.");
                 continue;
             }
 
             if ($module->enable())
-                $this->info("Module $module->name enabled successfully!");
+                $this->info("Module {$module->getNameOrAlias()} enabled successfully!");
             else
-                $this->error("An error occurred for enabling the module $module->name");
+                $this->error("An error occurred for enabling the module {$module->getNameOrAlias()}");
         }
     }
 }

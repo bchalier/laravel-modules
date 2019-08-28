@@ -19,7 +19,7 @@ class ModelMakeCommand extends BaseModelMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Models";
         } else {

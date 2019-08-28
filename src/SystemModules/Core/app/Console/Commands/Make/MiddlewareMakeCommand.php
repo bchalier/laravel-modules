@@ -18,7 +18,7 @@ class MiddlewareMakeCommand extends BaseMiddlewareMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Http\Middleware";
         } else {

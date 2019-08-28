@@ -20,7 +20,7 @@ class ControllerMakeCommand extends BaseControllerMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Http\Controllers";
         } else {

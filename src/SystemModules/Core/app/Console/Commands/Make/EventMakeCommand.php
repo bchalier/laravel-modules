@@ -18,7 +18,7 @@ class EventMakeCommand extends BaseEventMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Events";
         } else {

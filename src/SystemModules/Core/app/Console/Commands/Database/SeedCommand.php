@@ -20,7 +20,7 @@ class SeedCommand extends BaseSeedCommand
         if ($this->option('class') == 'DatabaseSeeder') {
             /** @var Module $module */
             foreach (ModulesManager::getActiveModules() as $module) {
-                $class = "Modules\\$module->name\Database\Seeds\DatabaseSeeder";
+                $class = "Modules\\{$module->getBaseNamespace()}\Database\Seeds\DatabaseSeeder";
 
                 $this->call('db:seed', [
                     '--class' => $class

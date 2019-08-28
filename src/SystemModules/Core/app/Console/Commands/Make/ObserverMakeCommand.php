@@ -18,7 +18,7 @@ class ObserverMakeCommand extends BaseObserverMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Observers";
         } else {

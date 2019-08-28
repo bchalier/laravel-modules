@@ -37,15 +37,15 @@ class ModuleUninstall extends Command
             }
 
             if ($module->isSystem()) {
-                $this->error("Module $module->name is a system module and cannot be uninstalled.");
+                $this->error("Module {$module->getNameOrAlias()} is a system module and cannot be uninstalled.");
                 continue;
             }
 
-            if ($this->option('force') || $this->confirm("Do you really want to uninstall the $module->name module ?")) {
+            if ($this->option('force') || $this->confirm("Do you really want to uninstall the {$module->getNameOrAlias()} module ?")) {
                 if ($module->uninstall()) {
-                    $this->info("Module $module->name uninstalled successfully!");
+                    $this->info("Module {$module->getNameOrAlias()} uninstalled successfully!");
                 } else {
-                    $this->error("An error occurred while uninstalling the module $module->name");
+                    $this->error("An error occurred while uninstalling the module {$module->getNameOrAlias()}");
                 }
             }
         }

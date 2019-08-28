@@ -37,15 +37,15 @@ class ModuleDelete extends Command
             }
 
             if ($module->isSystem()) {
-                $this->error("$module->name module is a system module and cannot be deleted.");
+                $this->error("{$module->getNameOrAlias()} module is a system module and cannot be deleted.");
                 continue;
             }
 
-            if ($this->confirm("Do you really want to delete the $module->name module (both in database and files) ? It will be eat by goblins and cannot ever be recovered.")) {
+            if ($this->confirm("Do you really want to delete the {$module->getNameOrAlias()} module (both in database and files) ? It will be eat by goblins and cannot ever be recovered.")) {
                 if ($module->delete())
-                    $this->info("The $module->name module has been successfully eaten by goblins.");
+                    $this->info("The {$module->getNameOrAlias()} module has been successfully eaten by goblins.");
                 else
-                    $this->error("An error occurred while eating the module $module->name, ours goblins are sick now, congratulation.");
+                    $this->error("An error occurred while eating the module {$module->getNameOrAlias()}, ours goblins are sick now, congratulation.");
             }
         }
     }

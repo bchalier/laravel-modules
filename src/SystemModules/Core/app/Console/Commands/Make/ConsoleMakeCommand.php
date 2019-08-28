@@ -16,7 +16,7 @@ class ConsoleMakeCommand extends BaseConsoleMakeCommand
     {
         if ($this->module && !$this->files->exists($this->module->path.'app/Console/Kernel.php')) {
             $className = $this->argument('name');
-            $module = $this->module->name;
+            $module = $this->module->getBaseNamespace();
 
             $stub = $this->files->get($this->getKernelStub());
             $this->replaceModule($stub, $module)->replaceClassName($stub, $className);
@@ -44,7 +44,7 @@ class ConsoleMakeCommand extends BaseConsoleMakeCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         if ($this->module) {
-            $moduleName = $this->module->name;
+            $moduleName = $this->module->getBaseNamespace();
 
             return $rootNamespace . "\\$moduleName\App\Console\Commands";
         } else {
