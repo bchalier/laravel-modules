@@ -57,9 +57,9 @@ class LaravelModulesServiceProvider extends ServiceProvider
     protected function loadConsole(Module $module)
     {
         if ($module->isSystem())
-            $kernelClass = 'SystemModules\\' . $module->name . '\App\Console\Kernel';
+            $kernelClass = "SystemModules\\{$module->getBaseNamespace()}\App\Console\Kernel";
         else
-            $kernelClass = 'Modules\\' . $module->name . '\App\Console\Kernel';
+            $kernelClass = "Modules\\{$module->getBaseNamespace()}\App\Console\Kernel";
 
         if (!class_exists($kernelClass))
             return;
@@ -116,9 +116,9 @@ class LaravelModulesServiceProvider extends ServiceProvider
     protected function loadRoutes(Module $module)
     {
         if ($module->isSystem())
-            $namespace = 'SystemModules\\' . $module->name . '\App\Http\Controllers';
+            $namespace = "SystemModules\\{$module->getBaseNamespace()}\App\Http\Controllers";
         else
-            $namespace = 'Modules\\' . $module->name . '\App\Http\Controllers';
+            $namespace = "Modules\\{$module->getBaseNamespace()}\App\Http\Controllers";
 
         // API routes
         Route::prefix(config('routing.prefix.api'))
