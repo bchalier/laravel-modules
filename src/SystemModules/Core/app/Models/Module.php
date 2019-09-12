@@ -190,7 +190,7 @@ class Module
      * @param $path
      * @return string
      */
-    public function path($path): string
+    public function path($path = ''): string
     {
         return base_path($this->path . $path);
     }

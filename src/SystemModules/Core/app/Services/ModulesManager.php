@@ -142,6 +142,6 @@ class ModulesManager
      */
     public function delete(Module $module): bool
     {
-        return $this->files->deleteDirectory(base_path($module->path));
+        return $this->files->deleteDirectory($module->path());
     }
 }

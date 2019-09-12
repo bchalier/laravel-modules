@@ -82,7 +82,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
     protected function loadFactories(Module $module)
     {
         if (class_exists('Faker\Factory')) {
-            $this->app->make('Illuminate\Database\Eloquent\Factory')->load($module->path . '/database/factories');
+            $this->app->make('Illuminate\Database\Eloquent\Factory')->load($module->path('/database/factories'));
         }
     }
 
@@ -94,7 +94,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
     protected function loadMigrations(Module $module)
     {
         if (empty($module->loadParameters['compartmentalize']['migrations']))
-            $this->loadMigrationsFrom($module->path . 'database/migrations');
+            $this->loadMigrationsFrom($module->path('database/migrations'));
     }
 
     /**
@@ -124,19 +124,19 @@ class LaravelModulesServiceProvider extends ServiceProvider
         Route::prefix(config('routing.prefix.api'))
             ->middleware('api')
             ->namespace($namespace)
-            ->group(base_path($module->path . 'routes/api.php'));
+            ->group($module->path('routes/api.php'));
 
         // web routes
         Route::prefix(config('routing.prefix.web'))
             ->middleware('web')
             ->namespace($namespace)
-            ->group(base_path($module->path . 'routes/web.php'));
+            ->group($module->path('routes/web.php'));
 
         // channels routes
-        $this->loadRoutesFrom(base_path($module->path . 'routes/channels.php'));
+        $this->loadRoutesFrom($module->path('routes/channels.php'));
 
         // console routes
-        $this->loadRoutesFrom(base_path($module->path . 'routes/console.php'));
+        $this->loadRoutesFrom($module->path('routes/console.php'));
     }
 
     /**
@@ -146,7 +146,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadTranslations(Module $module)
     {
-        $this->loadTranslationsFrom(base_path($module->path . 'resources/lang'), $module->alias);
+        $this->loadTranslationsFrom($module->path('resources/lang'), $module->alias);
     }
 
     /**
@@ -156,7 +156,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadViews(Module $module)
     {
-        $this->loadViewsFrom(base_path($module->path . 'resources/views'), $module->alias);
+        $this->loadViewsFrom($module->path('resources/views'), $module->alias);
     }
 
     /**
