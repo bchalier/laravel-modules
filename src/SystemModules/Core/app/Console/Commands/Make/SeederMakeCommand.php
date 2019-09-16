@@ -38,7 +38,7 @@ class SeederMakeCommand extends BaseSeederMakeCommand
                 return false;
             }
 
-            return $this->laravel->basePath().DIRECTORY_SEPARATOR . $module->path('database/seeds/'.$name.'.php');
+            return $module->path('database/seeds/'.$name.'.php');
         } else {
             return parent::getPath($name);
         }

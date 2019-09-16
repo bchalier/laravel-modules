@@ -14,14 +14,14 @@ class ConsoleMakeCommand extends BaseConsoleMakeCommand
      */
     public function afterHandle()
     {
-        if ($this->module && !$this->files->exists($this->module->path.'app/Console/Kernel.php')) {
+        if ($this->module && !$this->files->exists($this->module->path('app/Console/Kernel.php'))) {
             $className = $this->argument('name');
             $module = $this->module->getBaseNamespace();
 
             $stub = $this->files->get($this->getKernelStub());
             $this->replaceModule($stub, $module)->replaceClassName($stub, $className);
 
-            $this->files->put($this->module->path.'app/Console/Kernel.php', $stub);
+            $this->files->put($this->module->path('app/Console/Kernel.php'), $stub);
         }
     }
 

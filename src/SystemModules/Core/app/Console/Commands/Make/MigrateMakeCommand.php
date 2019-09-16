@@ -64,8 +64,8 @@ class MigrateMakeCommand extends BaseMigrateMakeCommand
                     ? $this->laravel->basePath() . DIRECTORY_SEPARATOR . $targetPath
                     : $targetPath;
             }
-    
-            return $this->laravel->basePath().DIRECTORY_SEPARATOR . $this->module->path . 'database/migrations';
+
+            return $this->module->path('database/migrations');
         } else {
             return parent::getMigrationPath();
         }
