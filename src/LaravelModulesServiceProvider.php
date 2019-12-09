@@ -123,12 +123,14 @@ class LaravelModulesServiceProvider extends ServiceProvider
         // API routes
         Route::prefix(config('routing.prefix.api'))
             ->middleware('api')
+            ->name($module->getAlias() . '.')
             ->namespace($namespace)
             ->group($module->path('routes/api.php'));
 
         // web routes
         Route::prefix(config('routing.prefix.web'))
             ->middleware('web')
+            ->name($module->getAlias() . '.')
             ->namespace($namespace)
             ->group($module->path('routes/web.php'));
 
