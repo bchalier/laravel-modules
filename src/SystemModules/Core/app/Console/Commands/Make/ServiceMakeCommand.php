@@ -30,7 +30,7 @@ class ServiceMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $type = 'Model';
+    protected $type = 'Service';
     
     /**
      * Get the stub file for the generator.
