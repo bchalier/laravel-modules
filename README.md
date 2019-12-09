@@ -90,6 +90,8 @@ modules/Test/
 │   └── Services
 │       └── DummyService.php
 ├── composer.json
+├── config
+│   ├── superconfig.php
 ├── database
 │   ├── factories
 │   │   └── DummyFactory.php
