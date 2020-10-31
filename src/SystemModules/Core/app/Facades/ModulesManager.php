@@ -1,9 +1,9 @@
 <?php
 
-namespace SystemModules\Core\App\Facades;
+namespace Bchalier\SystemModules\Core\App\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use SystemModules\Core\App\Models\Module;
+use Bchalier\SystemModules\Core\App\Models\Module;
 
 /**
  * @method static Module[] getActiveModules($andSystem = false)
@@ -11,7 +11,7 @@ use SystemModules\Core\App\Models\Module;
  * @method static bool uninstall(Module $module)
  * @method static bool delete(Module $module)
  *
- * @see \SystemModules\Core\App\Services\ModulesManager
+ * @see \Bchalier\SystemModules\Core\App\Services\ModulesManager
  */
 
 class ModulesManager extends Facade
@@ -25,6 +25,6 @@ class ModulesManager extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \SystemModules\Core\App\Services\ModulesManager::class;
+        return \Bchalier\SystemModules\Core\App\Services\ModulesManager::class;
     }
 }

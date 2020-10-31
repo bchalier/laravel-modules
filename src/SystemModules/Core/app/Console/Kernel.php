@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemModules\Core\App\Console;
+namespace Bchalier\SystemModules\Core\App\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;

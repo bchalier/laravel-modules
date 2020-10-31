@@ -1,9 +1,9 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Make;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Routing\Console\MiddlewareMakeCommand as BaseMiddlewareMakeCommand;
-use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 
 class MiddlewareMakeCommand extends BaseMiddlewareMakeCommand
 {

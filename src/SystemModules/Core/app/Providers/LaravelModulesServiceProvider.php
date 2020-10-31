@@ -1,12 +1,12 @@
 <?php
 
-namespace Bchalier\Modules;
+namespace Bchalier\SystemModules\Core\App\Providers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
-use SystemModules\Core\App\Models\Module;
+use Bchalier\SystemModules\Core\App\Models\Module;
 
 class LaravelModulesServiceProvider extends ServiceProvider
 {

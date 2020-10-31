@@ -1,9 +1,9 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Make;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Foundation\Console\ListenerMakeCommand as BaseListenerMakeCommand;
-use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 
 class ListenerMakeCommand extends BaseListenerMakeCommand
 {

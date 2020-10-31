@@ -1,32 +1,32 @@
 <?php
 
-namespace SystemModules\Core\App\Providers;
+namespace Bchalier\SystemModules\Core\App\Providers;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-use SystemModules\Core\App\Console\Commands\Database\SeedCommand;
-use SystemModules\Core\App\Console\Commands\Make\ChannelMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ConsoleMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ControllerMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\EventMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ExceptionMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\FactoryMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\JobMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ListenerMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\MailMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\MiddlewareMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\MigrateMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ModelMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\NotificationMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ObserverMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\PolicyMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ProviderMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\RuleMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\SeederMakeCommand;
-use SystemModules\Core\App\Console\Commands\Make\TestMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Database\SeedCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ChannelMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ConsoleMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ControllerMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\EventMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ExceptionMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\FactoryMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\JobMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ListenerMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\MailMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\MiddlewareMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\MigrateMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ModelMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\NotificationMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ObserverMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\PolicyMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ProviderMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\RuleMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\SeederMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make\TestMakeCommand;
 
 
 class CommandExtendProvider extends ServiceProvider implements DeferrableProvider

@@ -1,9 +1,9 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Make;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Foundation\Console\RuleMakeCommand as BaseRuleMakeCommand;
-use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 
 class RuleMakeCommand extends BaseRuleMakeCommand
 {

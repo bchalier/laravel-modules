@@ -21,10 +21,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Bchalier\\Modules\\": "src/",
-            "SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
-            "SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",
-            "SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/",
+            "Bchalier\\SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
+            "Bchalier\\SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",
+            "Bchalier\\SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/",
             "Modules\\": "../../../modules/"
         }
     },
@@ -36,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bchalier\\Modules\\LaravelModulesServiceProvider"
+                "Bchalier\\SystemModules\\Core\\App\\Providers\\LaravelModulesServiceProvider"
             ],
             "aliases": {
                 "ModulesManager": "SystemModules\\Core\\Facades\\ModulesManager"

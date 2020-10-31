@@ -1,11 +1,11 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Make;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\TestMakeCommand as BaseTestMakeCommand;
 use Illuminate\Support\Str;
-use SystemModules\Core\Console\Commands\traits\ExtendMakeCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 
 class TestMakeCommand extends BaseTestMakeCommand
 {

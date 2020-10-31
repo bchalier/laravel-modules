@@ -1,13 +1,13 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Make;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use SystemModules\Core\App\Facades\ModulesManager;
-use SystemModules\Core\App\Models\Module;
+use Bchalier\SystemModules\Core\App\Facades\ModulesManager;
+use Bchalier\SystemModules\Core\App\Models\Module;
 
 class ModuleMakeCommand extends Command
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Database;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Database;
 
 use Illuminate\Database\Console\Seeds\SeedCommand as BaseSeedCommand;
-use SystemModules\Core\App\Facades\ModulesManager;
-use SystemModules\Core\App\Models\Module;
+use Bchalier\SystemModules\Core\App\Facades\ModulesManager;
+use Bchalier\SystemModules\Core\App\Models\Module;
 
 class SeedCommand extends BaseSeedCommand
 {

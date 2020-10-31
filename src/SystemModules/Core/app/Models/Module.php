@@ -1,10 +1,10 @@
 <?php
 
-namespace SystemModules\Core\App\Models;
+namespace Bchalier\SystemModules\Core\App\Models;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use SystemModules\Core\App\Facades\ModulesManager;
+use Bchalier\SystemModules\Core\App\Facades\ModulesManager;
 
 class Module
 {
@@ -167,7 +167,7 @@ class Module
     /**
      * Uninstall the module
      *
-     * @return bool|\SystemModules\Core\App\Services\ModulesManager
+     * @return bool|\Bchalier\SystemModules\Core\App\Services\ModulesManager
      * @throws \Exception
      */
     public function uninstall(): bool
@@ -178,7 +178,7 @@ class Module
     /**
      * Delete the module
      *
-     * @return bool|\SystemModules\Core\App\Services\ModulesManager|null
+     * @return bool|\Bchalier\SystemModules\Core\App\Services\ModulesManager|null
      * @throws \Exception
      */
     public function delete(): bool

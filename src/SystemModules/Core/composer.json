@@ -25,8 +25,8 @@
         }
       },
       "providers": [
-        "SystemModules\\Core\\App\\Providers\\EventServiceProvider",
-        "SystemModules\\Core\\App\\Providers\\CommandExtendProvider"
+        "Bchalier\\SystemModules\\Core\\App\\Providers\\EventServiceProvider",
+        "Bchalier\\SystemModules\\Core\\App\\Providers\\CommandExtendProvider"
       ],
       "aliases": {
         "Test": "Illuminate\\Support\\Facades\\App",

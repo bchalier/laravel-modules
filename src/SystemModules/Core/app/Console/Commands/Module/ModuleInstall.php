@@ -1,10 +1,10 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Module;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Module;
 
 use Illuminate\Console\Command;
-use SystemModules\Core\App\Facades\ModulesManager;
-use SystemModules\Core\App\Models\Module;
+use Bchalier\SystemModules\Core\App\Facades\ModulesManager;
+use Bchalier\SystemModules\Core\App\Models\Module;
 
 class ModuleInstall extends Command
 {

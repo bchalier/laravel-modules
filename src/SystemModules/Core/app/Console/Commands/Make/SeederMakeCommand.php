@@ -1,10 +1,10 @@
 <?php
 
-namespace SystemModules\Core\App\Console\Commands\Make;
+namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
 use Illuminate\Database\Console\Seeds\SeederMakeCommand as BaseSeederMakeCommand;
 use Symfony\Component\Console\Input\InputOption;
-use SystemModules\Core\App\Models\Module;
+use Bchalier\SystemModules\Core\App\Models\Module;
 
 class SeederMakeCommand extends BaseSeederMakeCommand
 {
