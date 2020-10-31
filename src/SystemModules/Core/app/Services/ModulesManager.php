@@ -80,9 +80,6 @@ class ModulesManager
                 $this->files->makeDirectory($config['install']['createDir'], 0755, true, true);
             }
 
-        // adding composer module repository
-        exec('composer config extra.merge-plugin.include \'modules/*/composer.json\'');
-
         // registering module
         $module = new Module();
         $module->alias = $config['alias'];

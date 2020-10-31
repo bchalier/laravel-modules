@@ -120,7 +120,9 @@ modules/Test/
 
 ### Composer
 
-At the root of your module you have a composer.json, same as the one you know with just a bit extra, here an example :
+At the root of your module you have a composer.json, same as the one you know with just a bit extra, you will find an example bellow.
+
+IT DOES NOT INSTALL PACKAGES, would you want to look into wikimedia/composer-merge-plugin but it's not compatible with composer 2.
 
 ```
 {

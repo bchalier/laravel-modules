@@ -16,14 +16,15 @@
     "require": {
         "php": ">=7.1",
         "laravel/framework": "^8.0",
-        "wikimedia/composer-merge-plugin": "^1.4",
         "localheinz\/json-printer": "^2.0",
         "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
             "Bchalier\\Modules\\": "src/",
-            "SystemModules\\": "src/SystemModules/",
+            "SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
+            "SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",
+            "SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/",
             "Modules\\": "../../../modules/"
         }
     },
