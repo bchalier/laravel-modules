@@ -29,7 +29,6 @@ class LaravelModulesServiceProvider extends ServiceProvider
             $this->loadConfig($module);
             $this->loadProviders($module);
             $this->loadAliases($module);
-            $this->loadFactories($module);
             $this->loadMigrations($module);
             $this->loadConsole($module);
             $this->loadRoutes($module);
@@ -71,19 +70,6 @@ class LaravelModulesServiceProvider extends ServiceProvider
             $schedule = $this->app->make(Schedule::class);
             $kernel->schedule($schedule);
         });
-    }
-
-    /**
-     * Load module factories.
-     *
-     * @param Module $module
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    protected function loadFactories(Module $module)
-    {
-        if (class_exists('Faker\Factory')) {
-            $this->app->make('Illuminate\Database\Eloquent\Factory')->load($module->path('/database/factories'));
-        }
     }
 
     /**
