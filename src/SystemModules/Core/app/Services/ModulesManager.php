@@ -2,12 +2,12 @@
 
 namespace Bchalier\SystemModules\Core\App\Services;
 
+use Ergebnis\Json\Printer\Printer;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use League\Flysystem\FileNotFoundException;
-use Localheinz\Json\Printer\Printer;
 use Bchalier\SystemModules\Core\App\Models\Module;
 
 class ModulesManager
