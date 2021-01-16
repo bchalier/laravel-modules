@@ -5,6 +5,7 @@ namespace Bchalier\SystemModules\Core\App\Models;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Bchalier\SystemModules\Core\App\Facades\ModulesManager;
+use Illuminate\Support\Str;
 
 class Module
 {
@@ -33,7 +34,7 @@ class Module
      * @param $alias string
      * @return Module
      */
-    public static function findAlias($alias): ?Module
+    public static function findAlias(string $alias): ?Module
     {
         return self::where('alias', strtolower($alias))->first();
     }
@@ -41,6 +42,13 @@ class Module
     public static function where(string $key, $value): Collection
     {
         return self::all()->where($key, $value);
+    }
+
+    public static function whereStartWith(string $key, $value): Collection
+    {
+        return self::all()->filter(function ($module) use ($key, $value) {
+            return Str::startsWith($module->$key, $value);
+        });
     }
 
     public static function all(): Collection

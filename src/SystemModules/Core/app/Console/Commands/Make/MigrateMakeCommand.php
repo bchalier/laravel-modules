@@ -2,16 +2,15 @@
 
 namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
+use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand as BaseMigrateMakeCommand;
 use Illuminate\Support\Composer;
 use Illuminate\Database\Migrations\MigrationCreator;
-use Bchalier\SystemModules\Core\App\Models\Module;
 
 class MigrateMakeCommand extends BaseMigrateMakeCommand
 {
-    /** @var Module */
-    protected $module;
-    
+    use ExtendMakeCommand;
+
     /**
      * Create a new migration install command instance.
      *
@@ -26,29 +25,6 @@ class MigrateMakeCommand extends BaseMigrateMakeCommand
         ";
         
         parent::__construct($creator, $composer);
-    }
-    
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        if (!empty($moduleAlias = $this->option('module'))) {
-            $this->module = Module::findAlias($moduleAlias);
-            
-            if (!$this->module) {
-                $this->error("$moduleAlias module don't exists!");
-                return;
-            }
-        }
-        
-        parent::handle();
-        
-        if (method_exists($this, 'afterHandle')) {
-            $this->afterHandle();
-        }
     }
     
     /**

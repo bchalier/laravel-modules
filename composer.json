@@ -14,7 +14,7 @@
         {"name": "Bastien Chalier", "email": "bastien@chalier.io"}
     ],
     "require": {
-        "php": ">=7.1|^8.0",
+        "php": "^7.4|^8.0",
         "laravel/framework": "^8.0",
         "ergebnis/json-printer": "^3",
         "ext-json": "*"
