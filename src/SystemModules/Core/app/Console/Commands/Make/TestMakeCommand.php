@@ -2,7 +2,6 @@
 
 namespace Bchalier\SystemModules\Core\App\Console\Commands\Make;
 
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\TestMakeCommand as BaseTestMakeCommand;
 use Illuminate\Support\Str;
 use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
@@ -10,19 +9,6 @@ use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 class TestMakeCommand extends BaseTestMakeCommand
 {
     use ExtendMakeCommand;
-
-    /**
-     * Create a new test command instance.
-     *
-     * @param  Filesystem  $files
-     * @return void
-     */
-    public function __construct(Filesystem $files)
-    {
-        $this->signature .= " {--M|module= : The module where the command should be created.}";
-
-        parent::__construct($files);
-    }
 
     /**
      * Get the destination class path.
