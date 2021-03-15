@@ -14,12 +14,15 @@
         {"name": "Bastien Chalier", "email": "bastien@chalier.io"}
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "laravel/framework": "^8.0",
         "ergebnis/json-printer": "^3",
         "ext-json": "*"
     },
     "autoload": {
+        "files": [
+            "src/SystemModules/Core/app/helpers.php"
+        ],
         "psr-4": {
             "Bchalier\\SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
             "Bchalier\\SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",

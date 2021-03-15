@@ -150,6 +150,11 @@ class Module
         return ucfirst($this->alias);
     }
 
+    public function getNamespace(): string
+    {
+        return config('modules.base_namespace') . '\\' . $this->getBaseNamespace();
+    }
+
     /**
      * Enable the module
      *
@@ -200,6 +205,15 @@ class Module
      */
     public function path($path = ''): string
     {
-        return base_path($this->path . $path);
+        return base_path($this->relativePath($path));
+    }
+
+    /**
+     * @param $path
+     * @return string
+     */
+    public function relativePath($path = ''): string
+    {
+        return $this->path . $path;
     }
 }

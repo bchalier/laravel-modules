@@ -101,7 +101,7 @@ trait ExtendMakeCommand
      */
     protected function moduleRootNamespace()
     {
-        return 'Modules';
+        return config('modules.base_namespace');
     }
 
     /**

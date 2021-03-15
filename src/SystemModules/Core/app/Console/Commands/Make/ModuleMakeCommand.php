@@ -11,13 +11,6 @@ use Bchalier\SystemModules\Core\App\Models\Module;
 
 class ModuleMakeCommand extends Command
 {
-    /**
-     * The filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
-
     /** @var array : list the available commands for the --fill option */
     const fillMakeCommandList = [
         'channel',
@@ -44,17 +37,9 @@ class ModuleMakeCommand extends Command
         'test',
     ];
 
-    /**
-     * Create a new controller creator command instance.
-     *
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @return void
-     */
-    public function __construct(Filesystem $files)
+    public function __construct(protected Filesystem $files)
     {
         parent::__construct();
-        
-        $this->files = $files;
     }
     
     /**
@@ -122,6 +107,10 @@ class ModuleMakeCommand extends Command
         
         $this->makeRoutes($path);
         $this->makeDatabaseDirectory($module, $path);
+
+        if ($this->ask('Do you want to add psr-4 loads to your root composer.json ? You will have to add them manually after if you refuse.', 'yes') === 'yes') {
+            $this->addPsr4Loads(Module::findAlias($module));
+        }
 
         if ($this->option('fill')) {
             $this->fill($module);
@@ -283,6 +272,19 @@ class ModuleMakeCommand extends Command
         $this->replaceName($stub, $module);
     
         $this->files->put($path . 'seeds/DatabaseSeeder.php', $stub);
+    }
+
+    private function addPsr4Loads(Module $module)
+    {
+        $path = base_path('composer.json');
+
+        // normal autoload
+        set_json_value($path, "autoload.psr-4.{$module->getNamespace()}\\App\\", $module->relativePath('app'));
+        set_json_value($path, "autoload.psr-4.{$module->getNamespace()}\\Database\\Factories\\", $module->relativePath('database/factories'));
+        set_json_value($path, "autoload.psr-4.{$module->getNamespace()}\\Database\\Seeders\\", $module->relativePath('database/seeders'));
+
+        // dev autoload
+        set_json_value($path, "autoload-dev.psr-4.{$module->getNamespace()}\\Tests\\", $module->relativePath('tests'));
     }
 
     /**

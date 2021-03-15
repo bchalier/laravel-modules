@@ -99,26 +99,12 @@ class ModulesManager
      */
     public function setConfig(Module $module, $key, $value): bool
     {
-        $printer = new Printer();
-
-        $configFilePath = $module->path('composer.json');
-        $configFile = $this->files->get($configFilePath);
-
-        $config = json_decode($configFile, true);
-
-        Arr::set($config, 'extra.laravel-modules.' . $key, $value);
-
-        return $this->files->put($configFilePath, $printer->print(json_encode($config), '  '));
+        return set_json_value($module->path('composer.json'), 'extra.laravel-modules.' . $key, $value);
     }
 
     public function setGlobalConfig($module, $key, $value): bool
     {
-        $printer = new Printer();
-        $config = $this->getModulesConfig();
-
-        Arr::set($config, $module . '.' . $key, $value);
-
-        return $this->files->put(config('modules.config.path'), $printer->print(json_encode($config), '  '));
+        return set_json_value(config('modules.config.path'), $module . '.' . $key, $value);
     }
 
     public function dropGlobalConfig($module): bool
@@ -128,7 +114,7 @@ class ModulesManager
 
         unset($config[$module]);
 
-        return $this->files->put(config('modules.config.path'), $printer->print(json_encode($config), '  '));
+        return $this->files->put(config('modules.config.path'), $printer->print(json_encode($config, JSON_UNESCAPED_SLASHES), '    '));
     }
 
     /**
