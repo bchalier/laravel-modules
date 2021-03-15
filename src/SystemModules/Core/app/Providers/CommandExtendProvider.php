@@ -2,32 +2,11 @@
 
 namespace Bchalier\SystemModules\Core\App\Providers;
 
+use Bchalier\SystemModules\Core\App\Console\Commands\Database\SeedCommand;
+use Bchalier\SystemModules\Core\App\Console\Commands\Make;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-
-use Bchalier\SystemModules\Core\App\Console\Commands\Database\SeedCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ChannelMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ConsoleMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ControllerMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\EventMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ExceptionMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\FactoryMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\JobMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ListenerMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\MailMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\MiddlewareMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\MigrateMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ModelMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\NotificationMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ObserverMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\PolicyMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ProviderMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\RequestMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\ResourceMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\RuleMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\SeederMakeCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make\TestMakeCommand;
-
+use Illuminate\Support\Str;
 
 class CommandExtendProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -37,36 +16,28 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
      * @var array
      */
     protected $commands = [
-        'Seed' => 'command.seed',
-    ];
-
-    /**
-     * The commands to be registered.
-     *
-     * @var array
-     */
-    protected $devCommands = [
-        'ChannelMake' => 'command.channel.make',
-        'ConsoleMake' => 'command.console.make',
-        'ControllerMake' => 'command.controller.make',
-        'EventMake' => 'command.event.make',
-        'ExceptionMake' => 'command.exception.make',
-        'FactoryMake' => 'command.factory.make',
-        'JobMake' => 'command.job.make',
-        'ListenerMake' => 'command.listener.make',
-        'MailMake' => 'command.mail.make',
-        'MiddlewareMake' => 'command.middleware.make',
-        'MigrateMake' => 'command.migrate.make',
-        'ModelMake' => 'command.model.make',
-        'NotificationMake' => 'command.notification.make',
-        'ObserverMake' => 'command.observer.make',
-        'PolicyMake' => 'command.policy.make',
-        'ProviderMake' => 'command.provider.make',
-        'RequestMake' => 'command.request.make',
-        'ResourceMake' => 'command.resource.make',
-        'RuleMake' => 'command.rule.make',
-        'SeederMake' => 'command.seeder.make',
-        'TestMake' => 'command.test.make',
+        SeedCommand::class                  => 'command.seed',
+        Make\ChannelMakeCommand::class      => 'command.channel.make',
+        Make\ConsoleMakeCommand::class      => 'command.console.make',
+        Make\ControllerMakeCommand::class   => 'command.controller.make',
+        Make\EventMakeCommand::class        => 'command.event.make',
+        Make\ExceptionMakeCommand::class    => 'command.exception.make',
+        Make\FactoryMakeCommand::class      => 'command.factory.make',
+        Make\JobMakeCommand::class          => 'command.job.make',
+        Make\ListenerMakeCommand::class     => 'command.listener.make',
+        Make\MailMakeCommand::class         => 'command.mail.make',
+        Make\MiddlewareMakeCommand::class   => 'command.middleware.make',
+        Make\MigrateMakeCommand::class      => 'command.migrate.make',
+        Make\ModelMakeCommand::class        => 'command.model.make',
+        Make\NotificationMakeCommand::class => 'command.notification.make',
+        Make\ObserverMakeCommand::class     => 'command.observer.make',
+        Make\PolicyMakeCommand::class       => 'command.policy.make',
+        Make\ProviderMakeCommand::class     => 'command.provider.make',
+        Make\RequestMakeCommand::class      => 'command.request.make',
+        Make\ResourceMakeCommand::class     => 'command.resource.make',
+        Make\RuleMakeCommand::class         => 'command.rule.make',
+        Make\SeederMakeCommand::class       => 'command.seeder.make',
+        Make\TestMakeCommand::class         => 'command.test.make',
     ];
 
     /**
@@ -76,295 +47,19 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        $this->registerCommands(array_merge(
-            $this->commands, $this->devCommands
-        ));
-    }
+        foreach ($this->commands as $class => $name) {
+            $method = "register" . Str::afterLast($class, '\\');
 
-    /**
-     * Register the given commands.
-     *
-     * @param  array  $commands
-     * @return void
-     */
-    protected function registerCommands(array $commands)
-    {
-        foreach (array_keys($commands) as $command) {
-            call_user_func_array([$this, "register{$command}Command"], []);
+            if (method_exists($this, $method)) {
+                $this->$method($name);
+            } else {
+                $this->app->extend($name, function () use ($class) {
+                    return new $class($this->app['files']);
+                });
+            }
         }
 
-        $this->commands(array_values($commands));
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerChannelMakeCommand()
-    {
-        $this->app->extend('command.channel.make', function () {
-            return new ChannelMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerConsoleMakeCommand()
-    {
-        $this->app->extend('command.console.make', function () {
-            return new ConsoleMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerControllerMakeCommand()
-    {
-        $this->app->extend('command.controller.make', function () {
-            return new ControllerMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerEventMakeCommand()
-    {
-        $this->app->extend('command.event.make', function () {
-            return new EventMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerExceptionMakeCommand()
-    {
-        $this->app->extend('command.exception.make', function () {
-            return new ExceptionMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerFactoryMakeCommand()
-    {
-        $this->app->extend('command.factory.make', function () {
-            return new FactoryMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerJobMakeCommand()
-    {
-        $this->app->extend('command.job.make', function () {
-            return new JobMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerListenerMakeCommand()
-    {
-        $this->app->extend('command.listener.make', function () {
-            return new ListenerMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerMailMakeCommand()
-    {
-        $this->app->extend('command.mail.make', function () {
-            return new MailMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerMiddlewareMakeCommand()
-    {
-        $this->app->extend('command.middleware.make', function () {
-            return new MiddlewareMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerMigrateMakeCommand()
-    {
-        $this->app->extend('command.migrate.make', function () {
-            // Once we have the migration creator registered, we will create the command
-            // and inject the creator. The creator is responsible for the actual file
-            // creation of the migrations, and may be extended by these developers.
-            $creator = app('migration.creator');
-
-            $composer = app('composer');
-
-            return new MigrateMakeCommand($creator, $composer);
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerModelMakeCommand()
-    {
-        $this->app->extend('command.model.make', function () {
-            return new ModelMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerNotificationMakeCommand()
-    {
-        $this->app->extend('command.notification.make', function () {
-            return new NotificationMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerObserverMakeCommand()
-    {
-        $this->app->extend('command.observer.make', function () {
-            return new ObserverMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerPolicyMakeCommand()
-    {
-        $this->app->extend('command.policy.make', function () {
-            return new PolicyMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerProviderMakeCommand()
-    {
-        $this->app->extend('command.provider.make', function () {
-            return new ProviderMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerRequestMakeCommand()
-    {
-        $this->app->extend('command.request.make', function () {
-            return new RequestMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerResourceMakeCommand()
-    {
-        $this->app->extend('command.resource.make', function () {
-            return new ResourceMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerRuleMakeCommand()
-    {
-        $this->app->extend('command.rule.make', function () {
-            return new RuleMakeCommand(app('files'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerSeederMakeCommand()
-    {
-        $this->app->extend('command.seeder.make', function () {
-            return new SeederMakeCommand(app('files'), app('composer'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerSeedCommand()
-    {
-        $this->app->extend($this->commands['Seed'], function () {
-            return new SeedCommand(app('db'));
-        });
-    }
-
-    /**
-     * Register the command.
-     *
-     * @return void
-     */
-    protected function registerTestMakeCommand()
-    {
-        $this->app->extend('command.test.make', function () {
-            return new TestMakeCommand(app('files'));
-        });
+        $this->commands($this->commands);
     }
 
     /**
@@ -374,6 +69,50 @@ class CommandExtendProvider extends ServiceProvider implements DeferrableProvide
      */
     public function provides()
     {
-        return array_merge(array_values($this->commands), array_values($this->devCommands));
+        return $this->commands;
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerMigrateMakeCommand(string $name)
+    {
+        $this->app->extend($name, function () {
+            return new Make\MigrateMakeCommand(
+                $this->app['migration.creator'],
+                $this->app['composer']
+            );
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerSeederMakeCommand(string $name)
+    {
+        $this->app->extend($name, function () {
+            return new Make\SeederMakeCommand(
+                $this->app['files'],
+                $this->app['composer']
+            );
+        });
+    }
+
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerSeedCommand(string $name)
+    {
+        $this->app->extend($name, function () {
+            return new SeedCommand(
+                $this->app['db']
+            );
+        });
     }
 }
