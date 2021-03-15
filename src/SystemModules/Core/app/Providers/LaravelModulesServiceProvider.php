@@ -56,7 +56,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
     protected function loadConsole(Module $module)
     {
         if ($module->isSystem())
-            $kernelClass = "SystemModules\\{$module->getBaseNamespace()}\App\Console\Kernel";
+            $kernelClass = "Bchalier\\SystemModules\\{$module->getBaseNamespace()}\App\Console\Kernel";
         else
             $kernelClass = "Modules\\{$module->getBaseNamespace()}\App\Console\Kernel";
 
