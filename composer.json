@@ -17,7 +17,8 @@
         "php": "^8.0",
         "laravel/framework": "^8.0",
         "ergebnis/json-printer": "^3",
-        "ext-json": "*"
+        "laravel/framework": "^8.0",
+        "orchestra/testbench": "^6.13"
     },
     "autoload": {
         "files": [
@@ -27,7 +28,8 @@
             "Bchalier\\SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
             "Bchalier\\SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",
             "Bchalier\\SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/",
-            "Modules\\": "../../../modules/"
+            "Modules\\": "../../../modules/",
+            "Tests\\": "tests/"
         }
     },
     "autoload-dev": {
@@ -47,5 +49,8 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }
