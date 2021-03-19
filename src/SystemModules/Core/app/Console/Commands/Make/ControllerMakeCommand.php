@@ -45,7 +45,7 @@ class ControllerMakeCommand extends BaseControllerMakeCommand
         $model = trim(str_replace('/', '\\', $model), '\\');
 
         if (! Str::startsWith($model, [$rootNamespace = $this->laravel->getNamespace(), 'Modules\\'])) {
-            $model = $rootNamespace.$model;
+            $model = $rootNamespace . $model;
         }
 
         return $model;

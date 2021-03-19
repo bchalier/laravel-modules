@@ -88,7 +88,7 @@ trait ExtendMakeCommand
         if (!empty($this->option('module'))) {
             $name = Str::replaceFirst($this->rootNamespace(), strtolower($this->rootNamespace()), $name);
 
-            return base_path().'/'.str_replace('\\', '/', lcfirst($name)).'.php';
+            return base_path() . '/' . str_replace('\\', '/', lcfirst($name)) . '.php';
         } else {
             return parent::getPath($name);
         }
@@ -142,10 +142,11 @@ trait ExtendMakeCommand
     {
         $name = ltrim($name, '\\/');
 
-        if ($this->option('module'))
+        if ($this->option('module')) {
             $rootNamespace = $this->moduleRootNamespace();
-        else
+        } else {
             $rootNamespace = $this->rootNamespace();
+        }
 
         if (Str::startsWith($name, $rootNamespace)) {
             return $name;
@@ -154,7 +155,7 @@ trait ExtendMakeCommand
         $name = str_replace('/', '\\', $name);
 
         return $this->qualifyClass(
-            $this->getDefaultNamespace(trim($rootNamespace, '\\')).'\\'.$name
+            $this->getDefaultNamespace(trim($rootNamespace, '\\')) . '\\' . $name
         );
     }
 }

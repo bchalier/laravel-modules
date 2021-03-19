@@ -23,10 +23,10 @@ class MigrateMakeCommand extends BaseMigrateMakeCommand
         $this->signature .= "
                 {--M|module= : The module where the command should be created.}
         ";
-        
+
         parent::__construct($creator, $composer);
     }
-    
+
     /**
      * Get migration path (either specified by '--path' option or default location).
      *
