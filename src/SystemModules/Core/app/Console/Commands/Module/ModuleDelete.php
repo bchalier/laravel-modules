@@ -41,11 +41,18 @@ class ModuleDelete extends Command
                 continue;
             }
 
-            if ($this->confirm("Do you really want to delete the {$module->getNameOrAlias()} module (both in database and files) ? It will be eat by goblins and cannot ever be recovered.")) {
-                if ($module->delete())
+            $message = "Do you really want to delete the {$module->getNameOrAlias()} " .
+                "module (both in database and files) ?" .
+                "It will be eaten by goblins and cannot ever be recovered.";
+
+            if ($this->confirm($message)) {
+                if ($module->delete()) {
                     $this->info("The {$module->getNameOrAlias()} module has been successfully eaten by goblins.");
-                else
-                    $this->error("An error occurred while eating the module {$module->getNameOrAlias()}, ours goblins are sick now, congratulation.");
+                } else {
+                    $message = "An error occurred while eating the module {$module->getNameOrAlias()}, " .
+                        "our goblins are sick now, congratulation.";
+                    $this->error($message);
+                }
             }
         }
     }

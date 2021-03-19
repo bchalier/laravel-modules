@@ -41,7 +41,9 @@ class ModuleUninstall extends Command
                 continue;
             }
 
-            if ($this->option('force') || $this->confirm("Do you really want to uninstall the {$module->getNameOrAlias()} module ?")) {
+            $message = "Do you really want to uninstall the {$module->getNameOrAlias()} module ?";
+
+            if ($this->option('force') || $this->confirm($message)) {
                 if ($module->uninstall()) {
                     $this->info("Module {$module->getNameOrAlias()} uninstalled successfully!");
                 } else {

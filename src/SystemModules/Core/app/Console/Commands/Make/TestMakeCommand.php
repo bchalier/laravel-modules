@@ -22,7 +22,7 @@ class TestMakeCommand extends BaseTestMakeCommand
             $name = Str::replaceFirst($this->moduleRootNamespace(), strtolower($this->moduleRootNamespace()), $name);
             $name = Str::replaceFirst($this->rootNamespace(), strtolower($this->rootNamespace()), $name);
 
-            return base_path().'/'.str_replace('\\', '/', $name).'.php';
+            return base_path() . '/' . str_replace('\\', '/', $name) . '.php';
         } else {
             return parent::getPath($name);
         }
@@ -41,9 +41,9 @@ class TestMakeCommand extends BaseTestMakeCommand
             $rootNamespace = $rootNamespace . "\\$moduleName\Tests";
 
             if ($this->option('unit')) {
-                return $rootNamespace.'\Unit';
+                return $rootNamespace . '\Unit';
             } else {
-                return $rootNamespace.'\Feature';
+                return $rootNamespace . '\Feature';
             }
         } else {
             return parent::getDefaultNamespace($rootNamespace);

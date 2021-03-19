@@ -10,28 +10,28 @@ use Bchalier\SystemModules\Core\App\Console\Commands\Concerns\ExtendMakeCommand;
 class ServiceMakeCommand extends GeneratorCommand
 {
     use ExtendMakeCommand;
-    
+
     /**
      * The console command name.
      *
      * @var string
      */
     protected $name = 'make:service';
-    
+
     /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Create a new service class';
-    
+
     /**
      * The type of class being generated.
      *
      * @var string
      */
     protected $type = 'Service';
-    
+
     /**
      * Get the stub file for the generator.
      *
@@ -41,7 +41,7 @@ class ServiceMakeCommand extends GeneratorCommand
     {
         return __DIR__ . '/../stubs/service.stub';
     }
-    
+
     /**
      * Get the default namespace for the class.
      *
@@ -52,7 +52,7 @@ class ServiceMakeCommand extends GeneratorCommand
     {
         if ($this->module) {
             $moduleName = $this->module->getBaseNamespace();
-            
+
             return $rootNamespace . "\\$moduleName\App\Services";
         } else {
             return parent::getDefaultNamespace($rootNamespace);

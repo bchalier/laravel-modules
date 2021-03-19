@@ -62,23 +62,26 @@ class ModulesManager
     {
         $configFile = base_path($path . 'composer.json');
 
-        if (!file_exists($configFile))
+        if (!file_exists($configFile)) {
             throw new FileNotFoundException($configFile);
+        }
 
         $configFile = json_decode($this->files->get($configFile), true);
         $config = $configFile['extra']['laravel-modules'];
 
         // migrate migrations
-        if ($config['install']['migrate'])
+        if ($config['install']['migrate']) {
             Artisan::call('migrate', [
                 '--path' => $path . 'database/migrations'
             ]);
+        }
 
         // createDir directive
-        if (isset($config['install']['createDir']))
+        if (isset($config['install']['createDir'])) {
             if (!$this->files->isDirectory($config['install']['createDir'])) {
                 $this->files->makeDirectory($config['install']['createDir'], 0755, true, true);
             }
+        }
 
         // registering module
         $module = new Module();
@@ -114,7 +117,10 @@ class ModulesManager
 
         unset($config[$module]);
 
-        return $this->files->put(config('modules.config.path'), $printer->print(json_encode($config, JSON_UNESCAPED_SLASHES), '    '));
+        return $this->files->put(
+            config('modules.config.path'),
+            $printer->print(json_encode($config, JSON_UNESCAPED_SLASHES), '    ')
+        );
     }
 
     /**

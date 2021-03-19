@@ -44,8 +44,9 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadAliases(Module $module)
     {
-        foreach ($module->aliases as $abstract => $alias)
+        foreach ($module->aliases as $abstract => $alias) {
             $this->app->alias($abstract, $alias);
+        }
     }
 
     /**
@@ -55,15 +56,17 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadConsole(Module $module)
     {
-        if ($module->isSystem())
+        if ($module->isSystem()) {
             $kernelClass = "Bchalier\\SystemModules\\{$module->getBaseNamespace()}\App\Console\Kernel";
-        else
+        } else {
             $kernelClass = "Modules\\{$module->getBaseNamespace()}\App\Console\Kernel";
+        }
 
-        if (!class_exists($kernelClass))
+        if (!class_exists($kernelClass)) {
             return;
+        }
 
-        $kernel = new $kernelClass;
+        $kernel = new $kernelClass();
         $this->commands($kernel->commands);
 
         $this->app->booted(function () use ($kernel) {
@@ -79,8 +82,9 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadMigrations(Module $module)
     {
-        if (empty($module->loadParameters['compartmentalize']['migrations']))
+        if (empty($module->loadParameters['compartmentalize']['migrations'])) {
             $this->loadMigrationsFrom($module->path('database/migrations'));
+        }
     }
 
     /**
@@ -90,8 +94,9 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadProviders(Module $module)
     {
-        foreach ($module->providers as $provider)
+        foreach ($module->providers as $provider) {
             $this->app->register($provider);
+        }
     }
 
     /**
@@ -101,10 +106,11 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadRoutes(Module $module)
     {
-        if ($module->isSystem())
+        if ($module->isSystem()) {
             $namespace = "SystemModules\\{$module->getBaseNamespace()}\App\Http\Controllers";
-        else
+        } else {
             $namespace = "Modules\\{$module->getBaseNamespace()}\App\Http\Controllers";
+        }
 
         // API routes
         Route::prefix(config('routing.prefix.api'))
@@ -158,7 +164,8 @@ class LaravelModulesServiceProvider extends ServiceProvider
             /** @var \Symfony\Component\Finder\SplFileInfo $configFile */
             foreach ($this->app['files']->files($module->path('config')) as $configFile) {
                 $this->mergeConfigFrom(
-                    $configFile->getRealPath(), $configFile->getFilenameWithoutExtension()
+                    $configFile->getRealPath(),
+                    $configFile->getFilenameWithoutExtension()
                 );
             }
         }

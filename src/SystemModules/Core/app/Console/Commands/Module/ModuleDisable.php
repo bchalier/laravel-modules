@@ -46,10 +46,11 @@ class ModuleDisable extends Command
                 continue;
             }
 
-            if ($module->disable())
+            if ($module->disable()) {
                 $this->info("Module {$module->getNameOrAlias()} disabled successfully!");
-            else
+            } else {
                 $this->error("An error occurred while disabling the module {$module->getNameOrAlias()}");
+            }
         }
     }
 }

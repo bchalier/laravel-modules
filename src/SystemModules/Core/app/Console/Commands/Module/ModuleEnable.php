@@ -41,10 +41,11 @@ class ModuleEnable extends Command
                 continue;
             }
 
-            if ($module->enable())
+            if ($module->enable()) {
                 $this->info("Module {$module->getNameOrAlias()} enabled successfully!");
-            else
+            } else {
                 $this->error("An error occurred for enabling the module {$module->getNameOrAlias()}");
+            }
         }
     }
 }

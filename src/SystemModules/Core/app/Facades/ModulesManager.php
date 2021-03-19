@@ -13,7 +13,6 @@ use Bchalier\SystemModules\Core\App\Models\Module;
  *
  * @see \Bchalier\SystemModules\Core\App\Services\ModulesManager
  */
-
 class ModulesManager extends Facade
 {
     /**
