@@ -27,9 +27,7 @@
         "psr-4": {
             "Bchalier\\SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
             "Bchalier\\SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",
-            "Bchalier\\SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/",
-            "Modules\\": "../../../modules/",
-            "Tests\\": "tests/"
+            "Bchalier\\SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/"
         }
     },
     "autoload-dev": {
