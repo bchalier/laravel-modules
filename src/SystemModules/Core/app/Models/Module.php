@@ -147,7 +147,7 @@ class Module
 
     public function getBaseNamespace(): string
     {
-        return ucfirst($this->alias);
+        return $this->name;
     }
 
     public function getNamespace(): string

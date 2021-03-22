@@ -34,16 +34,16 @@ class MigrateMakeCommand extends BaseMigrateMakeCommand
      */
     protected function getMigrationPath()
     {
-        if ($this->module) {
-            if (! is_null($targetPath = $this->input->getOption('path'))) {
-                return ! $this->usingRealPath()
-                    ? $this->laravel->basePath() . DIRECTORY_SEPARATOR . $targetPath
-                    : $targetPath;
-            }
-
-            return $this->module->path('database/migrations');
-        } else {
+        if (! $this->module) {
             return parent::getMigrationPath();
         }
+
+        if (! is_null($targetPath = $this->input->getOption('path'))) {
+            return ! $this->usingRealPath()
+                ? $this->laravel->basePath() . DIRECTORY_SEPARATOR . $targetPath
+                : $targetPath;
+        }
+
+        return $this->module->path('database/migrations');
     }
 }
