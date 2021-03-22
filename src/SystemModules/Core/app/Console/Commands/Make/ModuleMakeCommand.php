@@ -12,7 +12,7 @@ use Bchalier\SystemModules\Core\App\Models\Module;
 class ModuleMakeCommand extends Command
 {
     /** @var array : list the available commands for the --fill option */
-    protected const FILLMAKECOMMANDLIST = [
+    protected const FILL_MAKE_COMMAND_LIST = [
         'channel',
         'command',
         'controller',
@@ -311,10 +311,10 @@ class ModuleMakeCommand extends Command
      */
     protected function fill($module)
     {
-        $bar = $this->output->createProgressBar(count(self::FILLMAKECOMMANDLIST));
+        $bar = $this->output->createProgressBar(count(self::FILL_MAKE_COMMAND_LIST));
         $bar->start();
 
-        foreach (self::FILLMAKECOMMANDLIST as $command) {
+        foreach (self::FILL_MAKE_COMMAND_LIST as $command) {
             $this->callSilent("make:$command", [
                 '--module' => $module,
                 'name' => 'Dummy' . ucfirst($command)
