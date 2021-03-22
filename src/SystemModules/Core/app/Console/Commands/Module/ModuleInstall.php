@@ -37,14 +37,14 @@ class ModuleInstall extends Command
                 continue;
             }
 
-            $moduleName = ucfirst($moduleName);
             $relativePath = "modules/$moduleName/";
 
-            if (ModulesManager::install($relativePath)) {
-                $this->info("Module $moduleName installed successfully!");
-            } else {
+            if (! ModulesManager::install($relativePath)) {
                 $this->error("An error occurred while uninstalling the module $moduleName.");
+                return 1;
             }
+
+            $this->info("Module $moduleName installed successfully!");
         }
     }
 }

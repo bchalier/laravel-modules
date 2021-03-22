@@ -65,8 +65,6 @@ class ModuleMakeCommand extends Command
     public function handle()
     {
         foreach ($this->argument('modules') as $module) {
-            $module = ucfirst(strtolower($module));
-
             if (!$this->generate($module)) {
                 continue;
             }

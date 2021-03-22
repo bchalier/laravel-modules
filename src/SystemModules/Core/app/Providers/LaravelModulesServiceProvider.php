@@ -106,31 +106,39 @@ class LaravelModulesServiceProvider extends ServiceProvider
      */
     protected function loadRoutes(Module $module)
     {
+        $namespace = "Modules\\{$module->getBaseNamespace()}\App\Http\Controllers";
+
         if ($module->isSystem()) {
             $namespace = "SystemModules\\{$module->getBaseNamespace()}\App\Http\Controllers";
-        } else {
-            $namespace = "Modules\\{$module->getBaseNamespace()}\App\Http\Controllers";
         }
 
         // API routes
-        Route::prefix(config('routing.prefix.api'))
-            ->middleware('api')
-            ->name($module->getAlias() . '.')
-            ->namespace($namespace)
-            ->group($module->path('routes/api.php'));
+        if (file_exists($module->path('routes/api.php'))) {
+            Route::prefix(config('routing.prefix.api'))
+                ->middleware('api')
+                ->name($module->getAlias() . '.')
+                ->namespace($namespace)
+                ->group($module->path('routes/api.php'));
+        }
 
         // web routes
-        Route::prefix(config('routing.prefix.web'))
-            ->middleware('web')
-            ->name($module->getAlias() . '.')
-            ->namespace($namespace)
-            ->group($module->path('routes/web.php'));
+        if (file_exists($module->path('routes/web.php'))) {
+            Route::prefix(config('routing.prefix.web'))
+                ->middleware('web')
+                ->name($module->getAlias() . '.')
+                ->namespace($namespace)
+                ->group($module->path('routes/web.php'));
+        }
 
         // channels routes
-        $this->loadRoutesFrom($module->path('routes/channels.php'));
+        if (file_exists($module->path('routes/channels.php'))) {
+            $this->loadRoutesFrom($module->path('routes/channels.php'));
+        }
 
         // console routes
-        $this->loadRoutesFrom($module->path('routes/console.php'));
+        if (file_exists($module->path('routes/console.php'))) {
+            $this->loadRoutesFrom($module->path('routes/console.php'));
+        }
     }
 
     /**
