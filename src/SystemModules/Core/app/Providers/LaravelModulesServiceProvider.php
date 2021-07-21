@@ -114,20 +114,28 @@ class LaravelModulesServiceProvider extends ServiceProvider
 
         // API routes
         if (file_exists($module->path('routes/api.php'))) {
-            Route::prefix(config('routing.prefix.api'))
-                ->middleware('api')
-                ->name($module->getAlias() . '.')
-                ->namespace($namespace)
-                ->group($module->path('routes/api.php'));
+            $routerApi = Route::prefix(config('routing.prefix.api'))
+            ->middleware('api')
+            ->name($module->getAlias() . '.');
+
+            if (config('modules.prefix_route_namespace') === true) {
+                $routerApi->namespace($namespace);
+            }
+
+            $routerApi->group($module->path('routes/api.php'));
         }
 
         // web routes
         if (file_exists($module->path('routes/web.php'))) {
-            Route::prefix(config('routing.prefix.web'))
-                ->middleware('web')
-                ->name($module->getAlias() . '.')
-                ->namespace($namespace)
-                ->group($module->path('routes/web.php'));
+            $routerWeb = Route::prefix(config('routing.prefix.web'))
+            ->middleware('web')
+            ->name($module->getAlias() . '.');
+
+            if (config('modules.prefix_route_namespace') === true) {
+                $routerWeb->namespace($namespace);
+            }
+
+            $routerWeb->group($module->path('routes/web.php'));
         }
 
         // channels routes
