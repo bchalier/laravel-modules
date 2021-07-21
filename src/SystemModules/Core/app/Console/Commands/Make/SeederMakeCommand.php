@@ -38,7 +38,7 @@ class SeederMakeCommand extends BaseSeederMakeCommand
                 return false;
             }
 
-            return $module->path('database/seeds/' . $name . '.php');
+            return $module->path('database/seeders/' . $name . '.php');
         } else {
             return parent::getPath($name);
         }

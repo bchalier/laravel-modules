@@ -2,10 +2,10 @@
 
 namespace Bchalier\SystemModules\Core\App\Console\Commands\Database;
 
-use Database\Seeders\DatabaseSeeder;
-use Illuminate\Database\Console\Seeds\SeedCommand as BaseSeedCommand;
 use Bchalier\SystemModules\Core\App\Facades\ModulesManager;
 use Bchalier\SystemModules\Core\App\Models\Module;
+use Database\Seeders\DatabaseSeeder;
+use Illuminate\Database\Console\Seeds\SeedCommand as BaseSeedCommand;
 
 class SeedCommand extends BaseSeedCommand
 {

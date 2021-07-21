@@ -267,12 +267,12 @@ class ModuleMakeCommand extends Command
 
         $this->makeDirectory($path . 'factories');
         $this->makeDirectory($path . 'migrations');
-        $this->makeDirectory($path . 'seeds');
+        $this->makeDirectory($path . 'seeders');
 
         $stub = $this->files->get($this->getSeederStub());
         $this->replaceName($stub, $module);
 
-        $this->files->put($path . 'seeds/DatabaseSeeder.php', $stub);
+        $this->files->put($path . 'seeders/DatabaseSeeder.php', $stub);
     }
 
     private function addPsr4Loads(Module $module)
