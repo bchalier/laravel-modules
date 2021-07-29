@@ -10,4 +10,9 @@ return [
 
     'prefix_route_namespace' => true,
 
+    'prefix' => [
+        'web' => env('WEB_PREFIX', ''),
+        'api' => env('API_PREFIX', 'api'),
+    ],
+
 ];

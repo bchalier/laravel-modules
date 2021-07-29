@@ -183,6 +183,10 @@ class LaravelModulesServiceProvider extends ServiceProvider
                     $configFile->getRealPath(),
                     $configFile->getFilenameWithoutExtension()
                 );
+
+                $this->publishes([
+                    $configFile->getRealPath() => config_path($configFile->getFilename()),
+                ], 'modules');
             }
         }
     }
