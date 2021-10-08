@@ -114,7 +114,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
 
         // API routes
         if (file_exists($module->path('routes/api.php'))) {
-            $routerApi = Route::prefix(config('routing.prefix.api'))
+            $routerApi = Route::prefix(config('modules.prefix.api'))
             ->middleware('api')
             ->name($module->getAlias() . '.');
 
@@ -127,7 +127,7 @@ class LaravelModulesServiceProvider extends ServiceProvider
 
         // web routes
         if (file_exists($module->path('routes/web.php'))) {
-            $routerWeb = Route::prefix(config('routing.prefix.web'))
+            $routerWeb = Route::prefix(config('modules.prefix.web'))
             ->middleware('web')
             ->name($module->getAlias() . '.');
 
