@@ -26,7 +26,8 @@
       },
       "providers": [
         "Bchalier\\SystemModules\\Core\\App\\Providers\\EventServiceProvider",
-        "Bchalier\\SystemModules\\Core\\App\\Providers\\CommandExtendProvider"
+        "Bchalier\\SystemModules\\Core\\App\\Providers\\ArtisanExtendServiceProvider",
+        "Bchalier\\SystemModules\\Core\\App\\Providers\\MigrationExtendServiceProvider"
       ],
       "aliases": {
         "Test": "Illuminate\\Support\\Facades\\App",

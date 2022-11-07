@@ -4,7 +4,7 @@ namespace Tests\Unit\Bchalier\SystemModules\Core\App\Providers;
 
 use Bchalier\SystemModules\Core\App\Console\Commands\Database\SeedCommand;
 use Bchalier\SystemModules\Core\App\Console\Commands\Make;
-use Bchalier\SystemModules\Core\App\Providers\CommandExtendProvider;
+use Bchalier\SystemModules\Core\App\Providers\ArtisanExtendServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 use Orchestra\Testbench\TestCase;
 
@@ -12,7 +12,7 @@ class CommandExtendProviderTest extends TestCase
 {
     protected function getPackageProviders($app)
     {
-        return [CommandExtendProvider::class];
+        return [ArtisanExtendServiceProvider::class];
     }
 
     public function testProvides()
@@ -44,7 +44,7 @@ class CommandExtendProviderTest extends TestCase
 
         $this->assertEquals(
             $commands,
-            (new CommandExtendProvider($this->app))->provides()
+            (new ArtisanExtendServiceProvider($this->app))->provides()
         );
     }
 
