@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Unit\Bchalier\SystemModules\Core\App\Providers;
+namespace Tests\Unit\Bchalier\SystemModules\Core\Providers;
 
-use Bchalier\SystemModules\Core\App\Console\Commands\Database\SeedCommand;
-use Bchalier\SystemModules\Core\App\Console\Commands\Make;
-use Bchalier\SystemModules\Core\App\Providers\ArtisanExtendServiceProvider;
+use Bchalier\LaravelModules\Console\Commands\Database\SeedCommand;
+use Bchalier\LaravelModules\Providers\ArtisanExtendServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 use Orchestra\Testbench\TestCase;
 
@@ -19,27 +18,27 @@ class CommandExtendProviderTest extends TestCase
     {
         $commands = [
             SeedCommand::class                  => 'command.seed',
-            Make\ChannelMakeCommand::class      => 'command.channel.make',
-            Make\ConsoleMakeCommand::class      => 'command.console.make',
-            Make\ControllerMakeCommand::class   => 'command.controller.make',
-            Make\EventMakeCommand::class        => 'command.event.make',
-            Make\ExceptionMakeCommand::class    => 'command.exception.make',
-            Make\FactoryMakeCommand::class      => 'command.factory.make',
-            Make\JobMakeCommand::class          => 'command.job.make',
-            Make\ListenerMakeCommand::class     => 'command.listener.make',
-            Make\MailMakeCommand::class         => 'command.mail.make',
-            Make\MiddlewareMakeCommand::class   => 'command.middleware.make',
-            Make\MigrateMakeCommand::class      => 'command.migrate.make',
-            Make\ModelMakeCommand::class        => 'command.model.make',
-            Make\NotificationMakeCommand::class => 'command.notification.make',
-            Make\ObserverMakeCommand::class     => 'command.observer.make',
-            Make\PolicyMakeCommand::class       => 'command.policy.make',
-            Make\ProviderMakeCommand::class     => 'command.provider.make',
-            Make\RequestMakeCommand::class      => 'command.request.make',
-            Make\ResourceMakeCommand::class     => 'command.resource.make',
-            Make\RuleMakeCommand::class         => 'command.rule.make',
-            Make\SeederMakeCommand::class       => 'command.seeder.make',
-            Make\TestMakeCommand::class         => 'command.test.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ChannelMakeCommand::class      => 'command.channel.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ConsoleMakeCommand::class      => 'command.console.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ControllerMakeCommand::class   => 'command.controller.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\EventMakeCommand::class        => 'command.event.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ExceptionMakeCommand::class    => 'command.exception.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\FactoryMakeCommand::class      => 'command.factory.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\JobMakeCommand::class          => 'command.job.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ListenerMakeCommand::class     => 'command.listener.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\MailMakeCommand::class         => 'command.mail.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\MiddlewareMakeCommand::class   => 'command.middleware.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\MigrateMakeCommand::class      => 'command.migrate.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ModelMakeCommand::class        => 'command.model.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\NotificationMakeCommand::class => 'command.notification.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ObserverMakeCommand::class     => 'command.observer.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\PolicyMakeCommand::class       => 'command.policy.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ProviderMakeCommand::class     => 'command.provider.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\RequestMakeCommand::class      => 'command.request.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\ResourceMakeCommand::class     => 'command.resource.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\RuleMakeCommand::class         => 'command.rule.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\SeederMakeCommand::class       => 'command.seeder.make',
+            \Bchalier\LaravelModules\Console\Commands\Make\TestMakeCommand::class         => 'command.test.make',
         ];
 
         $this->assertEquals(

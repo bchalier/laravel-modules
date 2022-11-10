@@ -1,0 +1,29 @@
+<?php
+
+namespace Modules\DummyModule\Console;
+
+use Illuminate\Console\Scheduling\Schedule;
+
+class Kernel
+{
+    /**
+     * The Artisan commands provided by your application.
+     * Need absolute namespace.
+     *
+     * @var array
+     */
+    public $commands = [
+//        \Modules\DummyModule\Console\Commands\DummyClass::class,
+    ];
+
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    public function schedule(Schedule $schedule)
+    {
+//        $schedule->command('inspire')->everyMinute();
+    }
+}

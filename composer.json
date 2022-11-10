@@ -19,18 +19,11 @@
         "ergebnis/json-printer": "^3"
     },
     "require-dev": {
-        "laravel/framework": "^8.0",
-        "orchestra/testbench": "^6.14",
-        "phpunit/phpunit": "^9.5"
+        "orchestra/testbench": "^6.14"
     },
     "autoload": {
-        "files": [
-            "src/SystemModules/Core/app/helpers.php"
-        ],
         "psr-4": {
-            "Bchalier\\SystemModules\\Core\\App\\": "src/SystemModules/Core/app/",
-            "Bchalier\\SystemModules\\Core\\Database\\Factories\\": "src/SystemModules/Core/database/factories/",
-            "Bchalier\\SystemModules\\Core\\Database\\Seeders\\": "src/SystemModules/Core/database/seeders/"
+            "Bchalier\\LaravelModules\\App\\": "src/"
         }
     },
     "autoload-dev": {
@@ -54,10 +47,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Bchalier\\SystemModules\\Core\\App\\Providers\\LaravelModulesServiceProvider"
+                "Bchalier\\LaravelModules\\App\\Providers\\LaravelModulesServiceProvider",
+                "Bchalier\\LaravelModules\\App\\Providers\\ArtisanExtendServiceProvider"
             ],
             "aliases": {
-                "ModulesManager": "SystemModules\\Core\\Facades\\ModulesManager"
+                "ModulesManager": "Bchalier\\LaravelModules\\Facades\\ModulesManager"
             }
         }
     },
