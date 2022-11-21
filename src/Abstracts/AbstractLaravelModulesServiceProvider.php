@@ -12,32 +12,27 @@ use Illuminate\Support\ServiceProvider;
 
 abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider implements DeclareBaseNamespace
 {
+    public function rootPath(string $path = ''): string
+    {
+        return lcfirst(str_replace(
+                '\\',
+                '/',
+            $this->rootNamespace(),
+        )) . DIRECTORY_SEPARATOR . $path;
+    }
+
     /**
      * @param Collection $modules
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot(): void
     {
-//        $this->loadConfig();
-//        $this->loadProviders();
-//        $this->loadAliases();
-//        $this->loadMigrations();
+        $this->loadConfig();
+        $this->loadMigrations();
         $this->loadConsole();
-//        $this->loadRoutes();
+        $this->loadRoutes();
 //        $this->loadTranslations();
 //        $this->loadViews();
-    }
-
-    /**
-     * Load aliases by module.
-     *
-     * @param Module $module
-     */
-    protected function loadAliases()
-    {
-        foreach ($module->aliases as $abstract => $alias) {
-            $this->app->alias($abstract, $alias);
-        }
     }
 
     /**
@@ -52,6 +47,7 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
         }
 
         $kernelClass = "{$this->rootNamespace()}\App\Console\Kernel";
+
         if (!class_exists($kernelClass)) {
             return;
         }
@@ -67,72 +63,52 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
      *
      * @param Module $module
      */
-    protected function loadMigrations(Module $module)
+    protected function loadMigrations()
     {
         if (empty($module->loadParameters['compartmentalize']['migrations'])) {
-            $this->loadMigrationsFrom($module->path('database/migrations'));
-        }
-    }
-
-    /**
-     * Load module providers as in the module's composer.json config.
-     *
-     * @param Module $module
-     */
-    protected function loadProviders(Module $module)
-    {
-        foreach ($module->providers as $provider) {
-            $this->app->register($provider);
+            $this->loadMigrationsFrom($this->rootPath('database/migrations'));
         }
     }
 
     /**
      *  Load module routes.
-     *
-     * @param Module $module
      */
-    protected function loadRoutes(Module $module)
+    protected function loadRoutes()
     {
-        $namespace = "Modules\\{$module->getBaseNamespace()}\App\Http\Controllers";
-
-        if ($module->isSystem()) {
-            $namespace = "SystemModules\\{$module->getBaseNamespace()}\App\Http\Controllers";
-        }
+        $namespace = $this->rootNamespace() . '\App\Http\Controllers';
 
         // API routes
-        if (file_exists($module->path('routes/api.php'))) {
+        if (file_exists($this->rootPath('routes/api.php'))) {
             $routerApi = Route::prefix(config('modules.prefix.api'))
-            ->middleware('api')
-            ->name($module->getAlias() . 'Providers');
+                ->middleware('api');
 
             if (config('modules.prefix_route_namespace') === true) {
                 $routerApi->namespace($namespace);
             }
 
-            $routerApi->group($module->path('routes/api.php'));
+            $routerApi->group($this->rootPath('routes/api.php'));
         }
 
         // web routes
-        if (file_exists($module->path('routes/web.php'))) {
+        if (file_exists($this->rootPath('routes/web.php'))) {
             $routerWeb = Route::prefix(config('modules.prefix.web'))
-            ->middleware('web')
-            ->name($module->getAlias() . 'Providers');
+                ->middleware('web');
 
             if (config('modules.prefix_route_namespace') === true) {
                 $routerWeb->namespace($namespace);
             }
 
-            $routerWeb->group($module->path('routes/web.php'));
+            $routerWeb->group($this->rootPath('routes/web.php'));
         }
 
         // channels routes
-        if (file_exists($module->path('routes/channels.php'))) {
-            $this->loadRoutesFrom($module->path('routes/channels.php'));
+        if (file_exists($this->rootPath('routes/channels.php'))) {
+            $this->loadRoutesFrom($this->rootPath('routes/channels.php'));
         }
 
         // console routes
-        if (file_exists($module->path('routes/console.php'))) {
-            $this->loadRoutesFrom($module->path('routes/console.php'));
+        if (file_exists($this->rootPath('routes/console.php'))) {
+            $this->loadRoutesFrom($this->rootPath('routes/console.php'));
         }
     }
 
@@ -143,7 +119,7 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
      */
     protected function loadTranslations(Module $module)
     {
-        $this->loadTranslationsFrom($module->path('resources/lang'), $module->alias);
+        $this->loadTranslationsFrom($this->rootPath('resources/lang'), $module->alias);
     }
 
     /**
@@ -153,7 +129,7 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
      */
     protected function loadViews(Module $module)
     {
-        $this->loadViewsFrom($module->path('resources/views'), $module->alias);
+        $this->loadViewsFrom($this->rootPath('resources/views'), $module->alias);
     }
 
     /**
@@ -161,19 +137,19 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
      *
      * @param Module $module
      */
-    protected function loadConfig(Module $module)
+    protected function loadConfig()
     {
-        if ($this->app['files']->isDirectory($module->path('config'))) {
+        if ($this->app['files']->isDirectory($this->rootPath('config'))) {
             /** @var \Symfony\Component\Finder\SplFileInfo $configFile */
-            foreach ($this->app['files']->files($module->path('config')) as $configFile) {
+            foreach ($this->app['files']->files($this->rootPath('config')) as $configFile) {
                 $this->mergeConfigFrom(
                     $configFile->getRealPath(),
-                    $configFile->getFilenameWithoutExtension()
+                    $configFile->getFilenameWithoutExtension(),
                 );
 
                 $this->publishes([
                     $configFile->getRealPath() => config_path($configFile->getFilename()),
-                ], 'modules');
+                ]);
             }
         }
     }
