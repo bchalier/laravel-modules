@@ -1,6 +1,6 @@
 <?php
 
-namespace Bchalier\SystemModules\Core\App\Factories;
+namespace Bchalier\LaravelModules\App\Factories;
 
 use Illuminate\Support\Str;
 

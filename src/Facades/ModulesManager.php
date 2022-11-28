@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool uninstall(Module $module)
  * @method static bool delete(Module $module)
  *
- * @see \Bchalier\LaravelModules\App\Services\ModulesManager
+ * @see \Bchalier\LaravelModules\App\Services\ModulesRepository
  */
 class ModulesManager extends Facade
 {
@@ -24,6 +24,6 @@ class ModulesManager extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \Bchalier\LaravelModules\App\Services\ModulesManager::class;
+        return \Bchalier\LaravelModules\App\Services\ModulesRepository::class;
     }
 }

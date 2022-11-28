@@ -27,7 +27,7 @@ class Kernel extends AbstractModulesKernel
         $this->load([
 //            __DIR__ . '/Commands/Module',
 //            __DIR__ . '/Commands/Make',
-//            __DIR__ . '/Commands/Database',
+            __DIR__ . '/Commands/Database',
         ]);
 
         require base_path('routes/console.php');

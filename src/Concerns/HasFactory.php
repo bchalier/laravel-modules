@@ -1,8 +1,8 @@
 <?php
 
-namespace Bchalier\SystemModules\Core\App\Concerns;
+namespace Bchalier\LaravelModules\App\Concerns;
 
-use Bchalier\SystemModules\Core\App\Factories\Factory;
+use Bchalier\LaravelModules\App\Factories\Factory;
 
 trait HasFactory
 {
