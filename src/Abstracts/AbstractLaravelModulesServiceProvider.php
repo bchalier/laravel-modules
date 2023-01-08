@@ -17,13 +17,18 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
         return lcfirst(str_replace(
                 '\\',
                 '/',
-            $this->rootNamespace(),
-        )) . DIRECTORY_SEPARATOR . $path;
+                $this->rootNamespace(),
+            )) . DIRECTORY_SEPARATOR . $path;
     }
 
     public function absolutePath(string $path = ''): string
     {
         return $this->app->basePath($this->rootPath($path));
+    }
+
+    public function alias(): string
+    {
+        return strtolower(last(explode('\\', $this->rootNamespace())));
     }
 
     /**
@@ -39,7 +44,7 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
         }
 
         $this->loadRoutes();
-//        $this->loadTranslations();
+        $this->loadTranslations();
 //        $this->loadViews();
     }
 
@@ -126,9 +131,9 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
      *
      * @param Module $module
      */
-    protected function loadTranslations(Module $module): void
+    protected function loadTranslations(): void
     {
-        $this->loadTranslationsFrom($this->absolutePath('resources/lang'), $module->alias);
+        $this->loadTranslationsFrom($this->absolutePath('lang'), $this->alias());
     }
 
     /**
