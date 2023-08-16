@@ -33,7 +33,7 @@ class Kernel extends AbstractModulesKernel
         require base_path('routes/console.php');
     }
 
-    protected function detectAppPath(): string
+    protected function detectAppPath(string $path): string
     {
         return Str::before(__DIR__, '/src/') . '/src/';
     }

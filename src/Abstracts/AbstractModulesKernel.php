@@ -79,16 +79,16 @@ class AbstractModulesKernel implements CanBoot
         }
 
         foreach ((new Finder)->in($paths)->files() as $command) {
-            $command = $this->detectAppNamespace() . str_replace(
+            $commandReference = $this->detectAppNamespace() . str_replace(
                     ['/', '.php'],
                     ['\\', ''],
-                    Str::after($command->getRealPath(), $this->detectAppPath())
+                    Str::after($command->getRealPath(), $this->detectAppPath($command->getRealPath()))
                 );
 
-            if (is_subclass_of($command, Command::class) &&
-                ! (new \ReflectionClass($command))->isAbstract()) {
-                Artisan::starting(function ($artisan) use ($command) {
-                    $artisan->resolve($command);
+            if (is_subclass_of($commandReference, Command::class) &&
+                ! (new \ReflectionClass($commandReference))->isAbstract()) {
+                Artisan::starting(function ($artisan) use ($commandReference) {
+                    $artisan->resolve($commandReference);
                 });
             }
         }

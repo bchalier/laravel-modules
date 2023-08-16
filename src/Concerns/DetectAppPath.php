@@ -6,8 +6,8 @@ use Illuminate\Support\Str;
 
 trait DetectAppPath
 {
-    protected function detectAppPath(): string
+    protected function detectAppPath(string $path): string
     {
-        return Str::before(__DIR__, '/app/') . '/app/';
+        return Str::before($path, '/app/') . '/app/';
     }
 }
