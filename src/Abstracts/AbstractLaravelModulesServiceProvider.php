@@ -45,7 +45,7 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
 
         $this->loadRoutes();
         $this->loadTranslations();
-//        $this->loadViews();
+        $this->loadViews();
     }
 
     public function register(): void
@@ -141,9 +141,9 @@ abstract class AbstractLaravelModulesServiceProvider extends ServiceProvider imp
      *
      * @param Module $module
      */
-    protected function loadViews(Module $module): void
+    protected function loadViews(): void
     {
-        $this->loadViewsFrom($this->absolutePath('resources/views'), $module->alias);
+        $this->loadViewsFrom($this->absolutePath('resources/views'), $this->alias());
     }
 
     /**
